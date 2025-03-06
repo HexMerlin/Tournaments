@@ -13,8 +13,15 @@ public class Program
         builder.RootComponents.Add<App>("#app");
         builder.RootComponents.Add<HeadOutlet>("head::after");
 
-        // Configure HttpClient for API communication
-        builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("http://localhost:5241") });
+        // Load configuration
+        builder.Services.AddScoped(sp => 
+        {
+            // Get configuration
+            var configuration = builder.Configuration;
+            var apiBaseUrl = configuration["ApiBaseUrl"] ?? "http://localhost:5241";
+            
+            return new HttpClient { BaseAddress = new Uri(apiBaseUrl) };
+        });
 
         // Register services
         builder.Services.AddScoped<IPlayerService, PlayerService>();
