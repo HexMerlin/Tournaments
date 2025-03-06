@@ -9,7 +9,7 @@ namespace Tournaments.Web.Services;
 public class ApiStatusService : IApiStatusService
 {
     private readonly HttpClient _httpClient;
-    private const string ApiEndpoint = "/api/TestUtility";
+    private const string ApiEndpoint = "api/TestUtility";
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ApiStatusService"/> class.
