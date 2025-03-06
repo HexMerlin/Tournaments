@@ -55,12 +55,12 @@ public class ApiStatusService : IApiStatusService
                 {
                     "The API server is not running.",
                     "The API server is running but is not responding.",
-                    "The API server is running on a different port than expected (http://localhost:5241)."
+                    "The API server is running on a different port than expected (https://tournaments-api.azurewebsites.net/)."
                 },
                 Suggestions = new[]
                 {
                     "Ensure the API project (Tournaments.Api) is running.",
-                    "Check if the API is accessible at http://localhost:5241/api/TestUtility/status in a browser.",
+                    "Check if the API is accessible at https://tournaments-api.azurewebsites.net/swagger in a browser.",
                     "Verify there are no firewall or network issues blocking the connection."
                 },
                 ApiUrl = $"{_httpClient.BaseAddress}{ApiEndpoint}/status",
