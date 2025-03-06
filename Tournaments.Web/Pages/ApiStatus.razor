@@ -3,7 +3,9 @@
 @using global::Tournaments.Web.Services
 @using global::Tournaments.Web.Shared
 @using System.Text.Json
+@using Microsoft.JSInterop
 @inject IApiStatusService ApiStatusService
+@inject IJSRuntime JSRuntime
 
 <h3>API Status</h3>
 
@@ -164,54 +166,84 @@
     </div>
 </div>
 
-<div class="card mb-4">
-    <div class="card-header">
-        <h5>Database Management</h5>
-    </div>
-    <div class="card-body">
-        <p>Reset the database to a clean state. This will remove all players, tournaments, and registrations.</p>
-        <div class="alert alert-warning api-alert">
-            <strong>Warning:</strong> This action cannot be undone.
+<div class="row">
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>Swagger UI</h5>
+            </div>
+            <div class="card-body">
+                <p>Open Swagger UI to explore and test the API endpoints directly.</p>
+                <button class="btn btn-warning swagger-button" @onclick="OpenSwaggerUI">
+                    <i class="oi oi-document mr-2"></i> Open Swagger UI
+                </button>
+                
+                @if (apiConnectionInfo != null)
+                {
+                    <div class="mt-3">
+                        <p>Swagger UI will open in a new tab, allowing you to:</p>
+                        <ul>
+                            <li>Explore all available API endpoints</li>
+                            <li>Test API operations directly</li>
+                            <li>View request and response schemas</li>
+                        </ul>
+                    </div>
+                }
+            </div>
         </div>
-        <button class="btn btn-danger" @onclick="ResetDatabase">Reset Database</button>
-        <LoadingSpinner IsLoading="@isResetLoading" Message="Resetting database..." />
-        @if (resetResponse != null)
-        {
-            <ApiResponseDisplay Response="@resetResponse" Title="Database Reset" IsError="@isResetError" />
-            
-            @if (resetErrorInfo != null)
-            {
-                <div class="alert alert-warning mt-3 api-alert">
-                    <h5>@resetErrorInfo.Error</h5>
-                    <p>@resetErrorInfo.Message</p>
-                    
-                    @if (resetErrorInfo.PossibleCauses != null)
-                    {
-                        <h6>Possible Causes:</h6>
-                        <ul>
-                            @foreach (var cause in resetErrorInfo.PossibleCauses)
-                            {
-                                <li>@cause</li>
-                            }
-                        </ul>
-                    }
-                    
-                    @if (resetErrorInfo.Suggestions != null)
-                    {
-                        <h6>Suggestions:</h6>
-                        <ul>
-                            @foreach (var suggestion in resetErrorInfo.Suggestions)
-                            {
-                                <li>@suggestion</li>
-                            }
-                        </ul>
-                    }
-                    
-                    <p class="mt-2"><small>API URL: @resetErrorInfo.ApiUrl</small></p>
-                    <p><small>Timestamp: @resetErrorInfo.Timestamp</small></p>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>Database Management</h5>
+            </div>
+            <div class="card-body">
+                <p>Reset the database to a clean state. This will remove all players, tournaments, and registrations.</p>
+                <div class="alert alert-warning api-alert">
+                    <strong>Warning:</strong> This action cannot be undone.
                 </div>
-            }
-        }
+                <button class="btn btn-danger" @onclick="ResetDatabase">Reset Database</button>
+                <LoadingSpinner IsLoading="@isResetLoading" Message="Resetting database..." />
+                @if (resetResponse != null)
+                {
+                    <ApiResponseDisplay Response="@resetResponse" Title="Database Reset" IsError="@isResetError" />
+                    
+                    @if (resetErrorInfo != null)
+                    {
+                        <div class="alert alert-warning mt-3 api-alert">
+                            <h5>@resetErrorInfo.Error</h5>
+                            <p>@resetErrorInfo.Message</p>
+                            
+                            @if (resetErrorInfo.PossibleCauses != null)
+                            {
+                                <h6>Possible Causes:</h6>
+                                <ul>
+                                    @foreach (var cause in resetErrorInfo.PossibleCauses)
+                                    {
+                                        <li>@cause</li>
+                                    }
+                                </ul>
+                            }
+                            
+                            @if (resetErrorInfo.Suggestions != null)
+                            {
+                                <h6>Suggestions:</h6>
+                                <ul>
+                                    @foreach (var suggestion in resetErrorInfo.Suggestions)
+                                    {
+                                        <li>@suggestion</li>
+                                    }
+                                </ul>
+                            }
+                            
+                            <p class="mt-2"><small>API URL: @resetErrorInfo.ApiUrl</small></p>
+                            <p><small>Timestamp: @resetErrorInfo.Timestamp</small></p>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
     </div>
 </div>
 
@@ -450,9 +482,90 @@
         }
     }
 
+    private void OpenSwaggerUI()
+    {
+        // Determine the Swagger URL based on the API connection
+        string swaggerUrl;
+        
+        if (apiConnectionInfo != null)
+        {
+            // Extract the base URL from the API connection info
+            var apiUrl = apiConnectionErrorInfo?.ApiUrl ?? "";
+            
+            if (!string.IsNullOrEmpty(apiUrl))
+            {
+                try
+                {
+                    // Parse the API URL to extract the base URL
+                    var uri = new Uri(apiUrl);
+                    var baseUrl = $"{uri.Scheme}://{uri.Host}";
+                    
+                    // Add port if it's not the default port
+                    if (!uri.IsDefaultPort)
+                    {
+                        baseUrl += $":{uri.Port}";
+                    }
+                    
+                    swaggerUrl = $"{baseUrl}/swagger";
+                }
+                catch
+                {
+                    // Fallback based on environment
+                    swaggerUrl = apiConnectionInfo.Environment.Contains("Azure", StringComparison.OrdinalIgnoreCase)
+                        ? "https://tournaments-api.azurewebsites.net/swagger"
+                        : "https://localhost:7169/swagger";
+                }
+            }
+            else
+            {
+                // Fallback based on environment
+                swaggerUrl = apiConnectionInfo.Environment.Contains("Azure", StringComparison.OrdinalIgnoreCase)
+                    ? "https://tournaments-api.azurewebsites.net/swagger"
+                    : "https://localhost:7169/swagger";
+            }
+        }
+        else
+        {
+            // Fallback if we don't have API connection info
+            swaggerUrl = "https://localhost:7169/swagger";
+        }
+        
+        Console.WriteLine($"Opening Swagger UI at: {swaggerUrl}");
+        
+        // Open Swagger UI in a new tab
+        JSRuntime.InvokeVoidAsync("open", swaggerUrl, "_blank");
+    }
+
     protected override async Task OnInitializedAsync()
     {
         // Automatically check API connection when the page loads
         await CheckApiConnection();
     }
-} 
+}
+
+<style>
+    .swagger-button {
+        background-color: #ff8c00;
+        border-color: #e67e00;
+        color: white;
+        font-weight: bold;
+        padding: 0.5rem 1rem;
+        transition: all 0.3s ease;
+    }
+    
+    .swagger-button:hover {
+        background-color: #e67e00;
+        border-color: #cc7000;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .swagger-button:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .swagger-button i {
+        margin-right: 0.5rem;
+    }
+</style> 
