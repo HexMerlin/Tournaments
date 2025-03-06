@@ -3,11 +3,6 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
- # Sensitive files
-*.publishsettings
-**/Properties/PublishProfiles/*.pubxml
-**/appsettings.Production.json
-
 # User-specific files
 *.rsuser
 *.suo
