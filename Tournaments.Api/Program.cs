@@ -16,6 +16,20 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        // Load environment-specific configuration
+        var environment = builder.Environment.EnvironmentName;
+        Console.WriteLine($"Running in environment: {environment}");
+        
+        // Load specific configuration based on environment
+        if (environment == "Local")
+        {
+            builder.Configuration.AddJsonFile("appsettings.Local.json", optional: true, reloadOnChange: true);
+        }
+        else if (environment == "Azure")
+        {
+            builder.Configuration.AddJsonFile("appsettings.Azure.json", optional: true, reloadOnChange: true);
+        }
+
         // Configure the database connection
         builder.Services.AddDbContext<TournamentsApiContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("TournamentsApiContext")
@@ -29,9 +43,28 @@ public class Program
                 var corsOrigins = builder.Configuration.GetSection("CorsOrigins").Get<string[]>() 
                     ?? new[] { "http://localhost:5181" };
                 
-                policy.WithOrigins(corsOrigins)
-                      .AllowAnyMethod()
-                      .AllowAnyHeader();
+                // Check if we have any wildcard origins
+                var hasWildcardOrigins = corsOrigins.Any(o => o.Contains("*"));
+                
+                if (hasWildcardOrigins)
+                {
+                    // If we have wildcard origins, allow any origin but still restrict to specific domains
+                    policy.SetIsOriginAllowed(origin => 
+                    {
+                        // Allow any localhost origin
+                        return origin.StartsWith("http://localhost:") || 
+                               origin.StartsWith("https://localhost:");
+                    })
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+                }
+                else
+                {
+                    // Otherwise, use the specific origins
+                    policy.WithOrigins(corsOrigins)
+                          .AllowAnyMethod()
+                          .AllowAnyHeader();
+                }
             });
         });
 
