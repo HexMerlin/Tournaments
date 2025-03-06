@@ -26,7 +26,10 @@ public class Program
         {
             options.AddPolicy("AllowBlazorApp", policy =>
             {
-                policy.WithOrigins("http://localhost:5181")
+                var corsOrigins = builder.Configuration.GetSection("CorsOrigins").Get<string[]>() 
+                    ?? new[] { "http://localhost:5181" };
+                
+                policy.WithOrigins(corsOrigins)
                       .AllowAnyMethod()
                       .AllowAnyHeader();
             });
