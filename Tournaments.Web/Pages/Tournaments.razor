@@ -1,0 +1,250 @@
+@page "/tournaments"
+@using global::Tournaments.Web.Services
+@using global::Tournaments.Web.Shared
+@using global::Tournaments.Shared.Models
+@inject ITournamentService TournamentService
+
+<h3>Tournaments</h3>
+
+<div class="mb-3">
+    <button class="btn btn-primary" @onclick="ShowTournamentForm">Add New Tournament</button>
+    <button class="btn btn-secondary" @onclick="LoadTournaments">Refresh</button>
+</div>
+
+<LoadingSpinner IsLoading="@isLoading" Message="Loading tournaments..." />
+
+@if (errorMessage != null)
+{
+    <ApiResponseDisplay Response="@errorMessage" Title="Error" IsError="true" />
+}
+
+@if (tournaments != null && !isLoading)
+{
+    @if (!tournaments.Any())
+    {
+        <p>No tournaments found. Add a new tournament to get started.</p>
+    }
+    else
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Parent Tournament</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var tournament in tournaments)
+                {
+                    <tr>
+                        <td>@tournament.Name</td>
+                        <td>@(tournament.ParentTournamentName ?? "None")</td>
+                        <td>
+                            <button class="btn btn-sm btn-primary" @onclick="() => ViewTournamentDetails(tournament.Name)">Details</button>
+                            <button class="btn btn-sm btn-danger" @onclick="() => DeleteTournament(tournament.Name)">Delete</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
+
+@if (showTournamentForm)
+{
+    <div class="card mt-4">
+        <div class="card-header">
+            Add New Tournament
+        </div>
+        <div class="card-body">
+            <EditForm Model="@currentTournament" OnValidSubmit="SaveTournament">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+
+                <div class="form-group mb-3">
+                    <label for="name">Name</label>
+                    <InputText id="name" @bind-Value="currentTournament.Name" class="form-control" />
+                    <ValidationMessage For="@(() => currentTournament.Name)" />
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="parentTournament">Parent Tournament</label>
+                    <InputSelect id="parentTournament" @bind-Value="currentTournament.ParentTournamentName" class="form-control">
+                        <option value="">None</option>
+                        @if (tournaments != null)
+                        {
+                            @foreach (var tournament in tournaments.Where(t => t.Name != currentTournament.Name))
+                            {
+                                <option value="@tournament.Name">@tournament.Name</option>
+                            }
+                        }
+                    </InputSelect>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-secondary" @onclick="CancelEdit">Cancel</button>
+            </EditForm>
+        </div>
+    </div>
+}
+
+@if (showTournamentDetails)
+{
+    <div class="card mt-4">
+        <div class="card-header">
+            Tournament Details: @selectedTournamentName
+        </div>
+        <div class="card-body">
+            <LoadingSpinner IsLoading="@isLoadingDetails" Message="Loading tournament details..." />
+
+            @if (selectedTournament != null)
+            {
+                <div class="mb-3">
+                    <h5>Tournament Information</h5>
+                    <p><strong>Name:</strong> @selectedTournament.Name</p>
+                    <p><strong>Parent Tournament:</strong> @(selectedTournament.ParentTournamentName ?? "None")</p>
+                </div>
+
+                @if (selectedTournament.SubTournaments.Any())
+                {
+                    <div class="mb-3">
+                        <h5>Sub-Tournaments</h5>
+                        <ul class="list-group">
+                            @foreach (var subTournament in selectedTournament.SubTournaments)
+                            {
+                                <li class="list-group-item">@subTournament.Name</li>
+                            }
+                        </ul>
+                    </div>
+                }
+                else
+                {
+                    <p>No sub-tournaments found.</p>
+                }
+            }
+
+            <button class="btn btn-secondary" @onclick="CloseDetails">Close</button>
+        </div>
+    </div>
+}
+
+@code {
+    private IEnumerable<Tournament>? tournaments;
+    private bool isLoading;
+    private string? errorMessage;
+    private bool showTournamentForm;
+    private Tournament currentTournament = new() { Name = "" };
+    private bool showTournamentDetails;
+    private bool isLoadingDetails;
+    private string? selectedTournamentName;
+    private Tournament? selectedTournament;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadTournaments();
+    }
+
+    private async Task LoadTournaments()
+    {
+        isLoading = true;
+        errorMessage = null;
+
+        try
+        {
+            tournaments = await TournamentService.GetTournamentsAsync();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error loading tournaments: {ex.Message}";
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private void ShowTournamentForm()
+    {
+        // Only for adding new tournaments
+        currentTournament = new Tournament { Name = "" };
+        showTournamentForm = true;
+    }
+
+    private void CancelEdit()
+    {
+        showTournamentForm = false;
+    }
+
+    private async Task SaveTournament()
+    {
+        isLoading = true;
+        errorMessage = null;
+
+        try
+        {
+            // Creating a new tournament
+            await TournamentService.CreateTournamentAsync(currentTournament);
+            showTournamentForm = false;
+            await LoadTournaments();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error saving tournament: {ex.Message}";
+            isLoading = false;
+        }
+    }
+
+    private async Task DeleteTournament(string name)
+    {
+        if (!await ShowConfirmation())
+        {
+            return;
+        }
+
+        isLoading = true;
+        errorMessage = null;
+
+        try
+        {
+            await TournamentService.DeleteTournamentAsync(name);
+            await LoadTournaments();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error deleting tournament: {ex.Message}";
+            isLoading = false;
+        }
+    }
+
+    private async Task ViewTournamentDetails(string name)
+    {
+        selectedTournamentName = name;
+        showTournamentDetails = true;
+        isLoadingDetails = true;
+
+        try
+        {
+            selectedTournament = await TournamentService.GetTournamentAsync(name, true);
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error loading tournament details: {ex.Message}";
+        }
+        finally
+        {
+            isLoadingDetails = false;
+        }
+    }
+
+    private void CloseDetails()
+    {
+        showTournamentDetails = false;
+        selectedTournament = null;
+    }
+
+    private Task<bool> ShowConfirmation()
+    {
+        return Task.FromResult(true); // In a real app, this would show a confirmation dialog
+    }
+} 

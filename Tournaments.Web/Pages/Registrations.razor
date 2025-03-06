@@ -1,0 +1,408 @@
+@page "/registrations"
+@using global::Tournaments.Web.Services
+@using global::Tournaments.Web.Shared
+@using global::Tournaments.Shared.Models
+@inject IRegistrationService RegistrationService
+@inject IPlayerService PlayerService
+@inject ITournamentService TournamentService
+
+<PageTitle>Tournament Registrations</PageTitle>
+
+<h1>Tournament Registrations</h1>
+
+@if (isLoading)
+{
+    <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+}
+else
+{
+    @if (!string.IsNullOrEmpty(errorMessage))
+    {
+        <div class="alert alert-danger" role="alert">
+            @errorMessage
+        </div>
+    }
+
+    @if (!string.IsNullOrEmpty(successMessage))
+    {
+        <div class="alert alert-success" role="alert">
+            @successMessage
+        </div>
+    }
+
+    <div class="row mb-4">
+        <div class="col-12">
+            <button class="btn btn-success" @onclick="ShowRegistrationForm">Register Player in Tournament</button>
+        </div>
+    </div>
+
+    @if (showRegistrationForm)
+    {
+        <div class="row mb-4">
+            <div class="col-md-6 mx-auto">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Register Player in Tournament</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="registrationPlayerSelect" class="form-label">Player:</label>
+                            <select id="registrationPlayerSelect" class="form-select" @bind="registrationPlayerGamertag">
+                                <option value="">-- Select Player --</option>
+                                @foreach (var player in players)
+                                {
+                                    <option value="@player.Gamertag">@player.Gamertag</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registrationTournamentSelect" class="form-label">Tournament:</label>
+                            <select id="registrationTournamentSelect" class="form-select" @bind="registrationTournamentName">
+                                <option value="">-- Select Tournament --</option>
+                                @foreach (var tournament in tournaments)
+                                {
+                                    <option value="@tournament.Name">@tournament.Name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <button class="btn btn-primary" @onclick="RegisterPlayer" 
+                                    disabled="@(string.IsNullOrEmpty(registrationTournamentName) || string.IsNullOrEmpty(registrationPlayerGamertag))">
+                                Register
+                            </button>
+                            <button class="btn btn-secondary" @onclick="CancelRegistration">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3>View Players in Tournament</h3>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="tournamentSelect" class="form-label">Select Tournament:</label>
+                        <select id="tournamentSelect" class="form-select" @bind="selectedTournamentName" @bind:after="LoadPlayersInTournament">
+                            <option value="">-- Select Tournament --</option>
+                            @foreach (var tournament in tournaments)
+                            {
+                                <option value="@tournament.Name">@tournament.Name</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            @if (playersInTournament != null && selectedTournamentName != null)
+            {
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h3>Players in Tournament: @selectedTournamentName</h3>
+                    </div>
+                    <div class="card-body">
+                        @if (!playersInTournament.Any())
+                        {
+                            <p>No players registered in this tournament.</p>
+                        }
+                        else
+                        {
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Gamertag</th>
+                                        <th>Name</th>
+                                        <th>Age</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var player in playersInTournament)
+                                    {
+                                        <tr>
+                                            <td>@player.Gamertag</td>
+                                            <td>@player.Name</td>
+                                            <td>@player.Age</td>
+                                            <td>
+                                                <button class="btn btn-danger btn-sm" @onclick="() => RemovePlayerFromTournament(selectedTournamentName, player.Gamertag)">
+                                                    Unregister
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3>View Tournaments for Player</h3>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="playerSelect" class="form-label">Select Player:</label>
+                        <select id="playerSelect" class="form-select" @bind="selectedPlayerGamertag" @bind:after="LoadTournamentsForPlayer">
+                            <option value="">-- Select Player --</option>
+                            @foreach (var player in players)
+                            {
+                                <option value="@player.Gamertag">@player.Gamertag</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            @if (tournamentsForPlayer != null && selectedPlayerGamertag != null)
+            {
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h3>Tournaments for Player: @selectedPlayerGamertag</h3>
+                    </div>
+                    <div class="card-body">
+                        @if (!tournamentsForPlayer.Any())
+                        {
+                            <p>This player is not registered in any tournaments.</p>
+                        }
+                        else
+                        {
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Parent Tournament</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var tournament in tournamentsForPlayer)
+                                    {
+                                        <tr>
+                                            <td>@tournament.Name</td>
+                                            <td>@(tournament.ParentTournamentName ?? "-")</td>
+                                            <td>
+                                                <button class="btn btn-danger btn-sm" @onclick="() => RemovePlayerFromTournament(tournament.Name, selectedPlayerGamertag)">
+                                                    Unregister
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+@code {
+    private bool isLoading;
+    private string? errorMessage;
+    private string? successMessage;
+    private IEnumerable<Tournament>? tournaments;
+    private IEnumerable<Player>? players;
+    private string? selectedTournamentName;
+    private string? selectedPlayerGamertag;
+    private IEnumerable<Player>? playersInTournament;
+    private IEnumerable<Tournament>? tournamentsForPlayer;
+    private bool showRegistrationForm;
+    private string? registrationTournamentName;
+    private string? registrationPlayerGamertag;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadInitialData();
+    }
+
+    private async Task LoadInitialData()
+    {
+        isLoading = true;
+        errorMessage = null;
+        successMessage = null;
+
+        try
+        {
+            tournaments = (await TournamentService.GetTournamentsAsync()).ToList();
+            players = (await PlayerService.GetPlayersAsync()).ToList();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error loading data: {ex.Message}";
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task LoadPlayersInTournament()
+    {
+        if (string.IsNullOrEmpty(selectedTournamentName))
+        {
+            playersInTournament = Array.Empty<Player>();
+            return;
+        }
+
+        isLoading = true;
+        errorMessage = null;
+
+        try
+        {
+            playersInTournament = await RegistrationService.GetPlayersInTournamentAsync(selectedTournamentName);
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error loading players in tournament: {ex.Message}";
+            playersInTournament = Array.Empty<Player>();
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task LoadTournamentsForPlayer()
+    {
+        if (string.IsNullOrEmpty(selectedPlayerGamertag))
+        {
+            tournamentsForPlayer = Array.Empty<Tournament>();
+            return;
+        }
+
+        isLoading = true;
+        errorMessage = null;
+
+        try
+        {
+            tournamentsForPlayer = await RegistrationService.GetTournamentsForPlayerAsync(selectedPlayerGamertag);
+        }
+        catch (Exception ex)
+        {
+            // Handle 404 error specifically for players with no tournaments
+            if (ex.Message.Contains("404"))
+            {
+                tournamentsForPlayer = Array.Empty<Tournament>();
+            }
+            else
+            {
+                errorMessage = $"Error loading tournaments for player: {ex.Message}";
+                tournamentsForPlayer = Array.Empty<Tournament>();
+            }
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private void ShowRegistrationForm()
+    {
+        showRegistrationForm = true;
+        registrationTournamentName = null;
+        registrationPlayerGamertag = null;
+        errorMessage = null;
+        successMessage = null;
+    }
+
+    private void CancelRegistration()
+    {
+        showRegistrationForm = false;
+        registrationTournamentName = null;
+        registrationPlayerGamertag = null;
+    }
+
+    private async Task RegisterPlayer()
+    {
+        if (string.IsNullOrEmpty(registrationTournamentName) || string.IsNullOrEmpty(registrationPlayerGamertag))
+            return;
+
+        isLoading = true;
+        errorMessage = null;
+        successMessage = null;
+
+        try
+        {
+            await RegistrationService.RegisterPlayerAsync(registrationTournamentName, registrationPlayerGamertag);
+            
+            // Show success message
+            successMessage = $"Successfully registered player '{registrationPlayerGamertag}' in tournament '{registrationTournamentName}'.";
+            
+            // Store the registration details before resetting the form
+            string registeredTournament = registrationTournamentName;
+            string registeredPlayer = registrationPlayerGamertag;
+            
+            // Reset form
+            showRegistrationForm = false;
+            registrationTournamentName = null;
+            registrationPlayerGamertag = null;
+
+            // Update the dropdown selections to match the newly registered player and tournament
+            selectedTournamentName = registeredTournament;
+            selectedPlayerGamertag = registeredPlayer;
+            
+            // Load the data for both views
+            await LoadPlayersInTournament();
+            await LoadTournamentsForPlayer();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error registering player: {ex.Message}";
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task RemovePlayerFromTournament(string tournamentName, string playerGamertag)
+    {
+        if (!await ShowConfirmation($"Are you sure you want to unregister {playerGamertag} from {tournamentName}?"))
+            return;
+
+        isLoading = true;
+        errorMessage = null;
+        successMessage = null;
+
+        try
+        {
+            await RegistrationService.RemovePlayerFromTournamentAsync(tournamentName, playerGamertag);
+            
+            // Show success message
+            successMessage = $"Successfully unregistered player '{playerGamertag}' from tournament '{tournamentName}'.";
+
+            // Refresh views if needed
+            if (selectedTournamentName == tournamentName)
+                await LoadPlayersInTournament();
+            
+            // Always refresh tournaments for player if the unregistered player is currently selected
+            if (selectedPlayerGamertag == playerGamertag)
+                await LoadTournamentsForPlayer();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error removing player from tournament: {ex.Message}";
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    // Simple confirmation dialog simulation
+    private Task<bool> ShowConfirmation(string message)
+    {
+        return Task.FromResult(true); // In a real app, this would show a dialog
+    }
+} 

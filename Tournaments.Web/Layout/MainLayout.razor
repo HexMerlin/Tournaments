@@ -1,0 +1,40 @@
+﻿@inherits LayoutComponentBase
+@inject NavigationManager NavigationManager
+
+@code {
+    private string GetPageClass()
+    {
+        var uri = NavigationManager.Uri;
+        var path = new Uri(uri).AbsolutePath.TrimStart('/');
+
+        if (string.IsNullOrEmpty(path))
+            return "page-home";
+        else if (path.StartsWith("players"))
+            return "page-players";
+        else if (path.StartsWith("tournaments"))
+            return "page-tournaments";
+        else if (path.StartsWith("registrations"))
+            return "page-registrations";
+        else if (path.StartsWith("api-status") || path.StartsWith("apistatus"))
+            return "page-api-status";
+        else
+            return "page-home"; // Default to home background
+    }
+}
+
+<div class="page @GetPageClass()">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="background-image"></div>
+        <div class="top-row px-4">
+            <a href="https://github.com/HexMerlin/Tournaments" target="_blank">Source code</a>
+        </div>
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>

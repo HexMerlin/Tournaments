@@ -1,0 +1,26 @@
+/* Page-specific background images */
+
+/* Home page - cs-background1.jpg */
+.page-home .background-image {
+    background-image: url('/images/cs-background1.jpg');
+}
+
+/* Players page - cs-background2.jpg */
+.page-players .background-image {
+    background-image: url('/images/cs-background2.jpg');
+}
+
+/* Tournaments page - cs-background3.jpg */
+.page-tournaments .background-image {
+    background-image: url('/images/cs-background3.jpg');
+}
+
+/* Registrations page - cs-background4.jpg */
+.page-registrations .background-image {
+    background-image: url('/images/cs-background4.jpg');
+}
+
+/* API Status page - cs-background5.jpg */
+.page-api-status .background-image {
+    background-image: url('/images/cs-background5.jpg');
+} 

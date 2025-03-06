@@ -1,0 +1,206 @@
+@page "/players"
+@using global::Tournaments.Web.Services
+@using global::Tournaments.Web.Shared
+@using global::Tournaments.Shared.Models
+@inject IPlayerService PlayerService
+
+<h3>Players</h3>
+
+<div class="mb-3">
+    <button class="btn btn-primary" @onclick="() => ShowPlayerForm(null)">Add New Player</button>
+    <button class="btn btn-secondary" @onclick="LoadPlayers">Refresh</button>
+</div>
+
+<LoadingSpinner IsLoading="@isLoading" Message="Loading players..." />
+
+@if (errorMessage != null)
+{
+    <ApiResponseDisplay Response="@errorMessage" Title="Error" IsError="true" />
+}
+
+@if (players != null && !isLoading)
+{
+    @if (!players.Any())
+    {
+        <p>No players found. Add a new player to get started.</p>
+    }
+    else
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Gamertag</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var player in players)
+                {
+                    <tr>
+                        <td>@player.Gamertag</td>
+                        <td>@player.Name</td>
+                        <td>@player.Age</td>
+                        <td>
+                            <button class="btn btn-sm btn-info" @onclick="() => ShowPlayerForm(player)">Edit</button>
+                            <button class="btn btn-sm btn-danger" @onclick="() => DeletePlayer(player.Gamertag)">Delete</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
+
+@if (showPlayerForm)
+{
+    <div class="card mt-4">
+        <div class="card-header">
+            @(editingPlayer == null ? "Add New Player" : "Edit Player")
+        </div>
+        <div class="card-body">
+            <EditForm Model="@currentPlayer" OnValidSubmit="SavePlayer">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+
+                <div class="form-group mb-3">
+                    <label for="gamertag">Gamertag</label>
+                    <InputText id="gamertag" @bind-Value="currentPlayer.Gamertag" class="form-control" disabled="@(editingPlayer != null)" />
+                    <ValidationMessage For="@(() => currentPlayer.Gamertag)" />
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="name">Name</label>
+                    <InputText id="name" @bind-Value="currentPlayer.Name" class="form-control" />
+                    <ValidationMessage For="@(() => currentPlayer.Name)" />
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="age">Age</label>
+                    <InputNumber id="age" @bind-Value="currentPlayer.Age" class="form-control" />
+                    <ValidationMessage For="@(() => currentPlayer.Age)" />
+                </div>
+
+                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-secondary" @onclick="CancelEdit">Cancel</button>
+            </EditForm>
+        </div>
+    </div>
+}
+
+@code {
+    private IEnumerable<Player>? players;
+    private bool isLoading;
+    private string? errorMessage;
+    private bool showPlayerForm;
+    private Player currentPlayer = new() { Gamertag = "", Name = "" };
+    private Player? editingPlayer;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadPlayers();
+    }
+
+    private async Task LoadPlayers()
+    {
+        isLoading = true;
+        errorMessage = null;
+
+        try
+        {
+            players = await PlayerService.GetPlayersAsync();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error loading players: {ex.Message}";
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private void ShowPlayerForm(Player? player)
+    {
+        if (player == null)
+        {
+            // Adding a new player
+            editingPlayer = null;
+            currentPlayer = new Player { Gamertag = "", Name = "", Age = 18 };
+        }
+        else
+        {
+            // Editing an existing player
+            editingPlayer = player;
+            currentPlayer = new Player
+            {
+                Gamertag = player.Gamertag,
+                Name = player.Name,
+                Age = player.Age
+            };
+        }
+
+        showPlayerForm = true;
+    }
+
+    private void CancelEdit()
+    {
+        showPlayerForm = false;
+    }
+
+    private async Task SavePlayer()
+    {
+        isLoading = true;
+        errorMessage = null;
+
+        try
+        {
+            if (editingPlayer == null)
+            {
+                // Creating a new player
+                await PlayerService.CreatePlayerAsync(currentPlayer);
+            }
+            else
+            {
+                // Updating an existing player
+                await PlayerService.UpdatePlayerAsync(editingPlayer.Gamertag, currentPlayer);
+            }
+
+            showPlayerForm = false;
+            await LoadPlayers();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error saving player: {ex.Message}";
+            isLoading = false;
+        }
+    }
+
+    private async Task DeletePlayer(string gamertag)
+    {
+        if (!await ShowConfirmation())
+        {
+            return;
+        }
+
+        isLoading = true;
+        errorMessage = null;
+
+        try
+        {
+            await PlayerService.DeletePlayerAsync(gamertag);
+            await LoadPlayers();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error deleting player: {ex.Message}";
+            isLoading = false;
+        }
+    }
+
+    private Task<bool> ShowConfirmation()
+    {
+        return Task.FromResult(true); // In a real app, this would show a confirmation dialog
+    }
+} 

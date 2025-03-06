@@ -1,0 +1,71 @@
+@inject IJSRuntime JSRuntime
+@implements IDisposable
+
+<div class="audio-toggle">
+    <button @onclick="ToggleAudio" class="btn btn-primary">
+        <span class="oi @(isPlaying ? "oi-volume-high" : "oi-volume-off")" aria-hidden="true"></span>
+        <span class="audio-label">@(isPlaying ? "Mute sound" : "Play sound")</span>
+    </button>
+</div>
+
+@code {
+    private bool isPlaying = true; // Default to true to show the correct initial state
+    private System.Threading.Timer? stateTimer;
+
+    protected override void OnInitialized()
+    {
+        // Create a timer to periodically check audio state
+        stateTimer = new System.Threading.Timer(
+            async _ => await CheckAudioState(),
+            null,
+            TimeSpan.FromSeconds(1),
+            TimeSpan.FromSeconds(1)
+        );
+    }
+
+    private async Task CheckAudioState()
+    {
+        try
+        {
+            var currentlyPlaying = await JSRuntime.InvokeAsync<bool>("audioControl.isPlaying");
+            if (currentlyPlaying != isPlaying)
+            {
+                isPlaying = currentlyPlaying;
+                await InvokeAsync(StateHasChanged);
+            }
+        }
+        catch
+        {
+            // Ignore errors during state check
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // Check initial state after a short delay to ensure audio is initialized
+            await Task.Delay(500);
+            await CheckAudioState();
+        }
+    }
+
+    private async Task ToggleAudio()
+    {
+        if (isPlaying)
+        {
+            await JSRuntime.InvokeVoidAsync("audioControl.pause");
+        }
+        else
+        {
+            await JSRuntime.InvokeVoidAsync("audioControl.play");
+        }
+
+        isPlaying = !isPlaying;
+    }
+    
+    public void Dispose()
+    {
+        stateTimer?.Dispose();
+    }
+} 

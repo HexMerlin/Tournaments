@@ -1,0 +1,28 @@
+.audio-toggle {
+    margin-top: auto;
+    padding: 1rem;
+    text-align: center;
+}
+
+.audio-toggle button {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.audio-toggle button:hover {
+    transform: scale(1.05);
+}
+
+.audio-toggle .oi {
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.audio-label {
+    font-size: 0.9rem;
+} 

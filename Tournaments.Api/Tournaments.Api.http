@@ -1,0 +1,278 @@
+@Tournaments.Api_HostAddress = http://localhost:5241
+@contentType = application/json
+
+###############################################
+### DATABASE SETUP & VERIFICATION
+###############################################
+
+### Check Initial Database Status
+GET {{Tournaments.Api_HostAddress}}/api/TestUtility/status
+Accept: {{contentType}}
+
+### Reset Database - Clean slate for testing
+POST {{Tournaments.Api_HostAddress}}/api/TestUtility/reset
+Content-Type: {{contentType}}
+
+### Verify Database is Empty
+GET {{Tournaments.Api_HostAddress}}/api/TestUtility/status
+Accept: {{contentType}}
+
+###############################################
+### PLAYER OPERATIONS
+###############################################
+
+### Create player 1: HexMerlin
+# @name createPlayer1
+POST {{Tournaments.Api_HostAddress}}/api/players
+Content-Type: {{contentType}}
+
+{
+  "gamertag": "HexMerlin",
+  "name": "John Doe",
+  "age": 31
+}
+
+### Create player 2: ShadowValkyrie
+# @name createPlayer2
+POST {{Tournaments.Api_HostAddress}}/api/players
+Content-Type: {{contentType}}
+
+{
+  "gamertag": "ShadowValkyrie",
+  "name": "Emily Johnson",
+  "age": 25
+}
+
+### Create player 3: TheDude
+# @name createPlayer3
+POST {{Tournaments.Api_HostAddress}}/api/players
+Content-Type: {{contentType}}
+
+{
+  "gamertag": "TheDude",
+  "name": "Jeff Lebowski",
+  "age": 45
+}
+
+### List all players (verify creation)
+GET {{Tournaments.Api_HostAddress}}/api/players
+Accept: {{contentType}}
+
+### Get specific player: HexMerlin
+GET {{Tournaments.Api_HostAddress}}/api/players/HexMerlin
+Accept: {{contentType}}
+
+### Update player: HexMerlin
+PUT {{Tournaments.Api_HostAddress}}/api/players/HexMerlin
+Content-Type: {{contentType}}
+
+{
+  "gamertag": "HexMerlin",
+  "name": "John Updated",
+  "age": 31
+}
+
+### Verify player update
+GET {{Tournaments.Api_HostAddress}}/api/players/HexMerlin
+Accept: {{contentType}}
+
+###############################################
+### TOURNAMENT OPERATIONS
+###############################################
+
+### Create main tournament: PGL-Major
+# @name createPGLMajor
+POST {{Tournaments.Api_HostAddress}}/api/tournaments
+Content-Type: {{contentType}}
+
+{
+  "name": "PGL-Major"
+}
+
+### Create another main tournament: ESL-Pro-League
+# @name createESLProLeague
+POST {{Tournaments.Api_HostAddress}}/api/tournaments
+Content-Type: {{contentType}}
+
+{
+  "name": "ESL-Pro-League"
+}
+
+### Create sub-tournament 1: Challengers-Stage
+# @name createChallengersStage
+POST {{Tournaments.Api_HostAddress}}/api/tournaments
+Content-Type: {{contentType}}
+
+{
+  "name": "Challengers-Stage",
+  "parentTournamentName": "PGL-Major"
+}
+
+### Create sub-tournament 2: Legends-Stage
+# @name createLegendsStage
+POST {{Tournaments.Api_HostAddress}}/api/tournaments
+Content-Type: {{contentType}}
+
+{
+  "name": "Legends-Stage",
+  "parentTournamentName": "PGL-Major"
+}
+
+### Create nested sub-tournament: Group-Stage
+# @name createGroupStage
+POST {{Tournaments.Api_HostAddress}}/api/tournaments
+Content-Type: {{contentType}}
+
+{
+  "name": "Group-Stage",
+  "parentTournamentName": "Challengers-Stage"
+}
+
+### List all tournaments (verify creation)
+GET {{Tournaments.Api_HostAddress}}/api/tournaments
+Accept: {{contentType}}
+
+### Get specific tournament: PGL-Major (without sub-tournaments)
+GET {{Tournaments.Api_HostAddress}}/api/tournaments/PGL-Major
+Accept: {{contentType}}
+
+### Get PGL-Major with sub-tournaments included
+GET {{Tournaments.Api_HostAddress}}/api/tournaments/PGL-Major?include=sub-tournaments
+Accept: {{contentType}}
+
+### Update tournament: ESL-Pro-League
+PUT {{Tournaments.Api_HostAddress}}/api/tournaments/ESL-Pro-League
+Content-Type: {{contentType}}
+
+{
+  "name": "ESL-Pro-League",
+  "parentTournamentName": null
+}
+
+###############################################
+### REGISTRATION OPERATIONS
+###############################################
+
+### Register HexMerlin in PGL-Major
+# @name registerHexMerlinPGLMajor
+POST {{Tournaments.Api_HostAddress}}/api/tournaments/PGL-Major/players/HexMerlin
+Content-Type: {{contentType}}
+
+### Register ShadowValkyrie in PGL-Major
+# @name registerShadowValkyriePGLMajor
+POST {{Tournaments.Api_HostAddress}}/api/tournaments/PGL-Major/players/ShadowValkyrie
+Content-Type: {{contentType}}
+
+### Register TheDude in ESL-Pro-Leaguer
+# @name registerTheDudeESLProLeague
+POST {{Tournaments.Api_HostAddress}}/api/tournaments/ESL-Pro-League/players/TheDude
+Content-Type: {{contentType}}
+
+### Register HexMerlin in ESL-Pro-League
+# @name registerHexMerlinESLProLeague
+POST {{Tournaments.Api_HostAddress}}/api/tournaments/ESL-Pro-League/players/HexMerlin
+Content-Type: {{contentType}}
+
+### Register HexMerlin in Challengers-Stage (should work as already in parent)
+# @name registerHexMerlinChallengersStage
+POST {{Tournaments.Api_HostAddress}}/api/tournaments/Challengers-Stage/players/HexMerlin
+Content-Type: {{contentType}}
+
+### Register ShadowValkyrie in Legends-Stage (should work as already in parent)
+# @name registerShadowValkyrieLegendsStage
+POST {{Tournaments.Api_HostAddress}}/api/tournaments/Legends-Stage/players/ShadowValkyrie
+Content-Type: {{contentType}}
+
+### Register HexMerlin in Group-Stage (should work as already in parent chain)
+# @name registerHexMerlinGroupStage
+POST {{Tournaments.Api_HostAddress}}/api/tournaments/Group-Stage/players/HexMerlin
+Content-Type: {{contentType}}
+
+### Get registration details: HexMerlin in PGL-Major
+GET {{Tournaments.Api_HostAddress}}/api/tournaments/PGL-Major/players/HexMerlin
+Accept: {{contentType}}
+
+###############################################
+### VALIDATION & CONSTRAINT TESTS
+###############################################
+
+### Try to create a tournament with duplicate name (should return 409 Conflict)
+POST {{Tournaments.Api_HostAddress}}/api/tournaments
+Content-Type: {{contentType}}
+
+{
+  "name": "PGL-Major"
+}
+
+### Try to register an already registered player (should return 409 Conflict)
+POST {{Tournaments.Api_HostAddress}}/api/tournaments/PGL-Major/players/HexMerlin
+Content-Type: {{contentType}}
+
+### Try to register a player in a sub-tournament without being in parent (should return 400 Bad Request)
+POST {{Tournaments.Api_HostAddress}}/api/tournaments/Challengers-Stage/players/TheDude
+Content-Type: {{contentType}}
+
+###############################################
+### REMOVAL OPERATIONS
+###############################################
+
+### Remove HexMerlin from Challengers-Stage
+# @name removeHexMerlinFromChallengersStage
+DELETE {{Tournaments.Api_HostAddress}}/api/registrations/Challengers-Stage/HexMerlin
+
+### Verify removal from Challengers-Stage (should return 404 Not Found)
+GET {{Tournaments.Api_HostAddress}}/api/tournaments/Challengers-Stage/players/HexMerlin
+Accept: {{contentType}}
+
+### Verify automatic removal from Group-Stage (should return 404 Not Found)
+GET {{Tournaments.Api_HostAddress}}/api/tournaments/Group-Stage/players/HexMerlin
+Accept: {{contentType}}
+
+### Verify still present in PGL-Major (parent tournament)
+GET {{Tournaments.Api_HostAddress}}/api/tournaments/PGL-Major/players/HexMerlin
+Accept: {{contentType}}
+
+### Delete player ShadowValkyrie
+# @name deleteShadowValkyrie
+DELETE {{Tournaments.Api_HostAddress}}/api/players/ShadowValkyrie
+
+### Verify ShadowValkyrie is deleted
+GET {{Tournaments.Api_HostAddress}}/api/players/ShadowValkyrie
+Accept: {{contentType}}
+
+### Delete ESL-Pro-League tournament
+# @name deleteESLProLeague
+DELETE {{Tournaments.Api_HostAddress}}/api/tournaments/ESL-Pro-League
+
+### Verify ESL-Pro-League is deleted
+GET {{Tournaments.Api_HostAddress}}/api/tournaments/ESL-Pro-League
+Accept: {{contentType}}
+
+### Delete PGL-Major (will delete all sub-tournaments)
+# @name deletePGLMajor
+DELETE {{Tournaments.Api_HostAddress}}/api/tournaments/PGL-Major
+
+
+### Verify PGL-Major is deleted
+GET {{Tournaments.Api_HostAddress}}/api/tournaments/PGL-Major
+Accept: {{contentType}}
+
+### Verify Challengers-Stage is also deleted (cascade)
+GET {{Tournaments.Api_HostAddress}}/api/tournaments/Challengers-Stage
+Accept: {{contentType}}
+
+### Verify Group-Stage is also deleted (cascade)
+GET {{Tournaments.Api_HostAddress}}/api/tournaments/Group-Stage
+Accept: {{contentType}}
+
+### Delete last player: TheDude
+# @name deleteTheDude
+DELETE {{Tournaments.Api_HostAddress}}/api/players/TheDude
+
+### Final Database Status Check
+GET {{Tournaments.Api_HostAddress}}/api/TestUtility/status
+Accept: {{contentType}}
+
+### Database should only have HexMerlin remaining
+GET {{Tournaments.Api_HostAddress}}/api/players
+Accept: {{contentType}}

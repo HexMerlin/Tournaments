@@ -1,0 +1,6 @@
+---
+description: Rules for the Tournaments application
+globs: 
+alwaysApply: false
+---
+[SPECIFICATIONS.md](mdc:Tournaments.Web/SPECIFICATIONS.md)

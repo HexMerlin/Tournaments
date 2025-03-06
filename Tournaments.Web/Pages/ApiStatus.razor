@@ -1,0 +1,323 @@
+@page "/api-status"
+@page "/apistatus"
+@using global::Tournaments.Web.Services
+@using global::Tournaments.Web.Shared
+@using System.Text.Json
+@inject IApiStatusService ApiStatusService
+
+<h3>API Status</h3>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>API Connection</h5>
+            </div>
+            <div class="card-body">
+                <p>Check if the API is running and accessible.</p>
+                <button class="btn btn-primary" @onclick="GetStatus">Check API Status</button>
+                <LoadingSpinner IsLoading="@isStatusLoading" Message="Checking API status..." />
+                @if (apiStatusResponse != null)
+                {
+                    <ApiResponseDisplay Response="@apiStatusResponse" Title="API Status" IsError="@isStatusError" />
+                    
+                    @if (apiErrorInfo != null)
+                    {
+                        <div class="alert alert-warning mt-3 api-alert">
+                            <h5>@apiErrorInfo.Error</h5>
+                            <p>@apiErrorInfo.Message</p>
+                            
+                            @if (apiErrorInfo.PossibleCauses != null)
+                            {
+                                <h6>Possible Causes:</h6>
+                                <ul>
+                                    @foreach (var cause in apiErrorInfo.PossibleCauses)
+                                    {
+                                        <li>@cause</li>
+                                    }
+                                </ul>
+                            }
+                            
+                            @if (apiErrorInfo.Suggestions != null)
+                            {
+                                <h6>Suggestions:</h6>
+                                <ul>
+                                    @foreach (var suggestion in apiErrorInfo.Suggestions)
+                                    {
+                                        <li>@suggestion</li>
+                                    }
+                                </ul>
+                            }
+                            
+                            <p class="mt-2"><small>API URL: @apiErrorInfo.ApiUrl</small></p>
+                            <p><small>Timestamp: @apiErrorInfo.Timestamp</small></p>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>Database Management</h5>
+            </div>
+            <div class="card-body">
+                <p>Reset the database to a clean state. This will remove all players, tournaments, and registrations.</p>
+                <div class="alert alert-warning api-alert">
+                    <strong>Warning:</strong> This action cannot be undone.
+                </div>
+                <button class="btn btn-danger" @onclick="ResetDatabase">Reset Database</button>
+                <LoadingSpinner IsLoading="@isResetLoading" Message="Resetting database..." />
+                @if (resetResponse != null)
+                {
+                    <ApiResponseDisplay Response="@resetResponse" Title="Database Reset" IsError="@isResetError" />
+                    
+                    @if (resetErrorInfo != null)
+                    {
+                        <div class="alert alert-warning mt-3 api-alert">
+                            <h5>@resetErrorInfo.Error</h5>
+                            <p>@resetErrorInfo.Message</p>
+                            
+                            @if (resetErrorInfo.PossibleCauses != null)
+                            {
+                                <h6>Possible Causes:</h6>
+                                <ul>
+                                    @foreach (var cause in resetErrorInfo.PossibleCauses)
+                                    {
+                                        <li>@cause</li>
+                                    }
+                                </ul>
+                            }
+                            
+                            @if (resetErrorInfo.Suggestions != null)
+                            {
+                                <h6>Suggestions:</h6>
+                                <ul>
+                                    @foreach (var suggestion in resetErrorInfo.Suggestions)
+                                    {
+                                        <li>@suggestion</li>
+                                    }
+                                </ul>
+                            }
+                            
+                            <p class="mt-2"><small>API URL: @resetErrorInfo.ApiUrl</small></p>
+                            <p><small>Timestamp: @resetErrorInfo.Timestamp</small></p>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Database Status</h5>
+    </div>
+    <div class="card-body">
+        @if (dbStatus != null)
+        {
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card text-center mb-3">
+                        <div class="card-body">
+                            <h3>@dbStatus.Players</h3>
+                            <p>Players</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-center mb-3">
+                        <div class="card-body">
+                            <h3>@dbStatus.Tournaments</h3>
+                            <p>Tournaments</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-center mb-3">
+                        <div class="card-body">
+                            <h3>@dbStatus.Registrations</h3>
+                            <p>Registrations</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="alert @(dbStatus.IsEmpty ? "alert-info" : "alert-success") api-alert">
+                <strong>Status:</strong> 
+                @if (dbStatus.IsEmpty)
+                {
+                    <span>Database is empty. You can add players and tournaments to get started.</span>
+                }
+                else
+                {
+                    <span>Database contains data and is ready to use.</span>
+                }
+            </div>
+        }
+        else if (apiErrorInfo != null)
+        {
+            <div class="alert alert-warning api-alert">
+                <strong>Database status unavailable.</strong> Please check the API connection.
+            </div>
+        }
+        else
+        {
+            <p>Click "Check API Status" to view database information.</p>
+        }
+    </div>
+</div>
+
+@code {
+    private bool isStatusLoading;
+    private bool isResetLoading;
+    private string? apiStatusResponse;
+    private string? resetResponse;
+    private bool isStatusError;
+    private bool isResetError;
+    private DatabaseStatus? dbStatus;
+    private ApiErrorInfo? apiErrorInfo;
+    private ApiErrorInfo? resetErrorInfo;
+
+    private class DatabaseStatus
+    {
+        public int Players { get; set; }
+        public int Tournaments { get; set; }
+        public int Registrations { get; set; }
+        public bool IsEmpty { get; set; }
+    }
+
+    private class ApiErrorInfo
+    {
+        public string Error { get; set; } = "";
+        public string Message { get; set; } = "";
+        public string[]? PossibleCauses { get; set; }
+        public string[]? Suggestions { get; set; }
+        public string ApiUrl { get; set; } = "";
+        public string Timestamp { get; set; } = "";
+        public string? StatusCode { get; set; }
+        public string? ExceptionType { get; set; }
+    }
+
+    private async Task GetStatus()
+    {
+        isStatusLoading = true;
+        apiStatusResponse = null;
+        isStatusError = false;
+        dbStatus = null;
+        apiErrorInfo = null;
+
+        try
+        {
+            apiStatusResponse = await ApiStatusService.GetStatusAsync();
+            
+            // Try to parse as error info first
+            try
+            {
+                apiErrorInfo = JsonSerializer.Deserialize<ApiErrorInfo>(apiStatusResponse);
+                if (!string.IsNullOrEmpty(apiErrorInfo?.Error))
+                {
+                    isStatusError = true;
+                    return;
+                }
+                else
+                {
+                    apiErrorInfo = null;
+                }
+            }
+            catch
+            {
+                // Not an error info object, continue with normal parsing
+                apiErrorInfo = null;
+            }
+            
+            // Parse the JSON response to extract database status
+            try
+            {
+                var jsonElement = JsonSerializer.Deserialize<JsonElement>(apiStatusResponse);
+                dbStatus = new DatabaseStatus
+                {
+                    Players = jsonElement.GetProperty("Players").GetInt32(),
+                    Tournaments = jsonElement.GetProperty("Tournaments").GetInt32(),
+                    Registrations = jsonElement.GetProperty("Registrations").GetInt32(),
+                    IsEmpty = jsonElement.GetProperty("IsEmpty").GetBoolean()
+                };
+            }
+            catch
+            {
+                // If parsing fails, leave dbStatus as null
+            }
+        }
+        catch (Exception ex)
+        {
+            apiStatusResponse = $"Error: {ex.Message}";
+            isStatusError = true;
+        }
+        finally
+        {
+            isStatusLoading = false;
+        }
+    }
+
+    private async Task ResetDatabase()
+    {
+        if (!await ShowConfirmation())
+        {
+            return;
+        }
+
+        isResetLoading = true;
+        resetResponse = null;
+        isResetError = false;
+        resetErrorInfo = null;
+
+        try
+        {
+            resetResponse = await ApiStatusService.ResetDatabaseAsync();
+            
+            // Try to parse as error info first
+            try
+            {
+                resetErrorInfo = JsonSerializer.Deserialize<ApiErrorInfo>(resetResponse);
+                if (!string.IsNullOrEmpty(resetErrorInfo?.Error))
+                {
+                    isResetError = true;
+                    return;
+                }
+                else
+                {
+                    resetErrorInfo = null;
+                }
+            }
+            catch
+            {
+                // Not an error info object, continue
+                resetErrorInfo = null;
+            }
+            
+            // After reset, refresh the status
+            await GetStatus();
+        }
+        catch (Exception ex)
+        {
+            resetResponse = $"Error: {ex.Message}";
+            isResetError = true;
+        }
+        finally
+        {
+            isResetLoading = false;
+        }
+    }
+
+    private Task<bool> ShowConfirmation()
+    {
+        return Task.FromResult(true); // In a real app, this would show a confirmation dialog
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetStatus();
+    }
+} 
