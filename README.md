@@ -1,26 +1,21 @@
-﻿# Tournament Management Application
+﻿
+# Tournament Management Application
 
 ## 1. Overview
 
-This application is a idiomatic **REST**ful web service for managing Counter-Strike tournaments. 
-This API strictly adheres to **Roy Fielding**’s thesis for REST architectural constraints, including **HATEOAS** (*H*ypermedia *a*s *t*he *E*ngine *o*f *A*pplication *S*tate). 
-Clients discover available actions dynamically through hypermedia links embedded in responses, without relying on predefined knowledge of endpoint structures beyond the entry point.
-This ensures a self-descriptive, evolvable, and loosely coupled API, where interactions are guided by the API itself rather than external documentation.
+A RESTful web-application (client + server) for managing Counter-Strike tournaments. 
 
-The repository provides a backend API for managing players and tournaments, database, documentation, unit tests and a Blazor WebAssembly frontend for interaction. 
-This is a one-off tech project for demo purposes and the joy of coding. 
-
-# 2. Technology Stack
-- **Backend:** ASP.NET Core Web API 
+## 2. Technology Stack
+- **Backend:** ASP.NET Core Web API (with Azure hosting)
 - **Entity Framework Core (EF Core)**
 - **SQL Server** (for persistence)
-- **RESTful architecture**
-- **Swagger UI** (for API testing and documentation)
+- **REST architecture** (incl. HATEOAS)
 
 - **Frontend:**
-  - **Blazor WebAssembly**
+  - **Blazor WebAssembly App**
   - **HttpClient** (for API communication)
   - **CSS for styling** 
+  - **Swagger UI** (for API testing and documentation)
 
 ## 3. Data Models
 
@@ -74,12 +69,43 @@ The core models of this application are as follows:
 - `GET /api/tournaments/{tournamentName}/players/{gamertag}` → Retrieve a specific registration.
 - `GET /api/tournaments/{tournamentName}/players` → Retrieve all players registered in a tournament.
 
-## 5. HATEOAS Compliance
+## 5. Data Constraints & Deletion Rules
 
-All API responses include relevant hypermedia links, allowing clients to dynamically navigate the system. Links use consistent relation names across resources.
-Clients need no prior knowledge about how to interact with the application or server beyond a generic understanding of hypermedia.
+- **Tournament Deletion:**
+  - If a tournament is deleted, all its sub-tournaments are deleted.
+  - All players registered in the tournament and its sub-tournaments are unregistered from these.
+  - Players remain in other tournaments where they are registered.
 
-For instance, as an entry-point, a 'GET /' request returns the following response:
+- **Player Deletion:**
+  - If a player is deleted, they are removed from all tournaments they were registered in.
+
+- **Registration Constraints:**
+  - Players can only register in a sub-tournament if they are already in the parent tournament.
+  - Removing a player from a tournament also removes them from all sub-tournaments.
+
+- All constraints are enforced at the API level, not in the database.
+
+## 6. API Behavior & Error Handling
+
+- Standard RESTful HTTP methods and status codes include:
+  - `400` → Validation error (e.g., duplicate gamertag, invalid player registration). Responses are in JSON format following the ProblemDetails specification.
+  - `404` → Resource not found.
+  - `409` → Conflict (e.g., attempting to register a player already in a tournament).
+
+- **Use ProblemDetails format for error responses.****Use ProblemDetails format for error responses.**
+
+## 7. Misc Info
+- Tournament retrieval allows optional embedding of sub-tournaments via `GET api/tournaments/{name}?include=sub-tournaments`.
+- Since this is a demo project, we prioritize ease of use - no user logins or passwords are required.
+
+## 8. Appendix. HATEOAS API Responses
+
+The API adheres to to strict REST architectural constraints which implies HATEOAS (Hypermedia As The Engine Of Application State). 
+Clients can discover available actions dynamically through hypermedia links embedded in responses, without relying on predefined knowledge of endpoint structures beyond the entry point. 
+This ensures a self-descriptive, evolvable, and loosely coupled API, where interactions are guided by the API itself rather than external documentation.
+API responses include relevant hypermedia links, allowing clients to dynamically navigate the system. Links use consistent relation names across resources.
+
+For instance, as an entry-point, a 'GET /' request could return the following response:
 
 ```json
 {
@@ -200,34 +226,3 @@ Another example response with some populated data (tournament with registered pl
 
 
 ```
-## 6. Data Constraints & Deletion Rules
-
-- **Tournament Deletion:**
-  - If a tournament is deleted, all its sub-tournaments are deleted.
-  - All players registered in the tournament and its sub-tournaments are unregistered from these.
-  - Players remain in other tournaments where they are registered.
-
-- **Player Deletion:**
-  - If a player is deleted, they are removed from all tournaments they were registered in.
-
-- **Registration Constraints:**
-  - Players can only register in a sub-tournament if they are already in the parent tournament.
-  - Removing a player from a tournament also removes them from all sub-tournaments.
-
-- All constraints are enforced at the API level, not in the database.
-
-## 7. API Behavior & Error Handling
-
-- Standard RESTful HTTP methods and status codes include:
-  - `400` → Validation error (e.g., duplicate gamertag, invalid player registration). Responses are in JSON format following the ProblemDetails specification.
-  - `404` → Resource not found.
-  - `409` → Conflict (e.g., attempting to register a player already in a tournament).
-
-- **Use ProblemDetails format for error responses.****Use ProblemDetails format for error responses.**
-
-## 8. Misc Info
-
-- Pure RESTful architecture (stateless API).
-- Tournament retrieval allows optional embedding of sub-tournaments via `GET api/tournaments/{name}?include=sub-tournaments`.
-- The Blazor UI prevents invalid actions before making API calls.
-- Since this is a demo project, we prioritize ease of use - no logins or passwords is required.
