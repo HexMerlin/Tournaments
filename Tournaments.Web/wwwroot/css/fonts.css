@@ -33,40 +33,77 @@
     font-display: swap;
 }
 
-/* Apply Counter-Strike font to specific UI elements */
+/* Apply Counter-Strike font to specific UI elements with corrected proportions */
+
+/* Common styles for all Counter-Strike font elements */
+.cs-font {
+    font-family: 'CounterStrike', Helvetica, Arial, sans-serif !important;
+    letter-spacing: 1px;
+    /* Fix height proportions - scale vertically by 1.5 without affecting width */
+    transform: scaleY(1.4);
+    transform-origin: top left;
+    /* Add margin to compensate for the increased height */
+    margin-bottom: 0.5em;
+    /* Preserve line height */
+    line-height: normal;
+}
 
 /* 1. Main menu items and header */
 .sidebar .navbar-brand,
 .sidebar .nav-item a {
     font-family: 'CounterStrike', Helvetica, Arial, sans-serif !important;
     letter-spacing: 1px;
+    transform: scaleY(1.5);
+    transform-origin: top left;
+    /* Adjust padding to compensate for the increased height */
+    padding-bottom: 0.5em;
 }
 
 /* 2. Homepage main title */
 .home-title {
     font-family: 'CounterStrike', Helvetica, Arial, sans-serif !important;
     letter-spacing: 1px;
+    transform: scaleY(1.5);
+    transform-origin: top left;
+    margin-bottom: 1em;
 }
 
 /* 3. Page headers */
 h1, h3 {
     font-family: 'CounterStrike', Helvetica, Arial, sans-serif !important;
     letter-spacing: 1px;
+    transform: scaleY(1.5);
+    transform-origin: top left;
+    margin-bottom: 0.8em;
 }
 
 /* 4. Pane headers (card headers) */
 .card-header h5 {
     font-family: 'CounterStrike', Helvetica, Arial, sans-serif !important;
     letter-spacing: 1px;
+    transform: scaleY(1.5);
+    transform-origin: top left;
+    /* Adjust card header padding to accommodate taller text */
+    padding-top: 0.5rem;
+    padding-bottom: 0.8rem;
 }
 
 /* Adjust font size for better readability */
 .sidebar .navbar-brand {
     font-size: 1.5rem;
+    /* Adjust line height to prevent overlap with menu items */
+    line-height: 1.2;
+    /* Add extra padding to prevent text from being cut off */
+    padding-bottom: 0.8em;
 }
 
 .sidebar .nav-item a {
     font-size: 1.2rem;
+    /* Adjust line height to prevent overlap with other menu items */
+    line-height: 1.2;
+    /* Add extra padding to prevent text from being cut off */
+    padding-top: 0.3em;
+    padding-bottom: 0.5em;
 }
 
 /* Note: The dash character '-' in this font renders as a Counter-Strike soldier.
