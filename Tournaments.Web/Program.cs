@@ -13,12 +13,30 @@ public class Program
         builder.RootComponents.Add<App>("#app");
         builder.RootComponents.Add<HeadOutlet>("head::after");
 
-        // Load configuration
+        var environment = builder.HostEnvironment.Environment;
+        Console.WriteLine($"Running in environment: {environment}");
+        
+        // In Blazor WebAssembly, configuration files are loaded from wwwroot by default
+        // No need to explicitly load them, but we'll log what we're using
+        
+        // Configure services with the loaded configuration
         builder.Services.AddScoped(sp => 
         {
             // Get configuration
             var configuration = builder.Configuration;
-            var apiBaseUrl = configuration["ApiBaseUrl"] ?? "http://localhost:5241";
+            var apiBaseUrl = configuration["ApiBaseUrl"];
+            
+            // Fallback values based on environment
+            if (string.IsNullOrEmpty(apiBaseUrl))
+            {
+                apiBaseUrl = environment == "Azure" 
+                    ? "https://tournaments-api.azurewebsites.net" 
+                    : "https://localhost:7169";
+                
+                Console.WriteLine($"Warning: ApiBaseUrl not found in configuration, using fallback: {apiBaseUrl}");
+            }
+            
+            Console.WriteLine($"Using API base URL: {apiBaseUrl}");
             
             return new HttpClient { BaseAddress = new Uri(apiBaseUrl) };
         });
