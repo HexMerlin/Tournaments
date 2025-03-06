@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Tournaments.Api.Data;
 
@@ -31,7 +30,7 @@ public class TestUtilityController : ControllerBase
     /// </summary>
     /// <returns>A status message indicating the result of the operation.</returns>
     /// <response code="200">If the database reset is successful.</response>
-    /// <response code="400">If the operation is attempted in a non-development environment.</response>
+    /// <response code="400">If the operation is attempted in a production environment.</response>
     /// <response code="500">If an error occurs during the reset operation.</response>
     [HttpPost("reset")]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -39,29 +38,25 @@ public class TestUtilityController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> ResetDatabase()
     {
-        // Only allow in development environment
-        if (!_environment.IsDevelopment())
+        // Allow in Local, Development, and Azure environments, but not in Production
+        var allowedEnvironments = new[] { "Local", "Development", "Azure" };
+        if (!allowedEnvironments.Contains(_environment.EnvironmentName))
         {
-            return BadRequest("This operation is only allowed in development environment");
+            return BadRequest($"This operation is only allowed in {string.Join(", ", allowedEnvironments)} environments");
         }
 
         try
         {
             // Remove all registrations
-            var registrations = await _context.Registration.ToListAsync();
-            _context.Registration.RemoveRange(registrations);
+            await _context.Registration.ExecuteDeleteAsync();
 
             // Remove all tournaments
-            var tournaments = await _context.Tournament.ToListAsync();
-            _context.Tournament.RemoveRange(tournaments);
+            await _context.Tournament.ExecuteDeleteAsync();
 
             // Remove all players
-            var players = await _context.Player.ToListAsync();
-            _context.Player.RemoveRange(players);
+            await _context.Player.ExecuteDeleteAsync();
 
-            await _context.SaveChangesAsync();
-
-            return Ok("Database reset completed successfully");
+            return Ok(new { message = "Database reset successful" });
         }
         catch (Exception ex)
         {
@@ -70,10 +65,28 @@ public class TestUtilityController : ControllerBase
     }
 
     /// <summary>
-    /// Gets the current status of the database.
+    /// Gets the status of the API without accessing the database.
     /// </summary>
-    /// <returns>An object containing the counts of players, tournaments, and registrations, and a flag indicating if the database is empty.</returns>
-    /// <response code="200">Returns the current status of the database.</response>
+    /// <returns>A simple status message.</returns>
+    /// <response code="200">If the API is running.</response>
+    [HttpGet("api-status")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public ActionResult<object> GetApiStatus()
+    {
+        return new
+        {
+            status = "API is running",
+            environment = _environment.EnvironmentName,
+            timestamp = DateTime.UtcNow,
+            version = "1.0.0"
+        };
+    }
+
+    /// <summary>
+    /// Gets the status of the database.
+    /// </summary>
+    /// <returns>Information about the database contents.</returns>
+    /// <response code="200">If the database status is retrieved successfully.</response>
     /// <response code="500">If an error occurs while retrieving the database status.</response>
     [HttpGet("status")]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -88,10 +101,10 @@ public class TestUtilityController : ControllerBase
 
             return new
             {
-                Players = playerCount,
-                Tournaments = tournamentCount,
-                Registrations = registrationCount,
-                IsEmpty = playerCount == 0 && tournamentCount == 0 && registrationCount == 0
+                players = playerCount,
+                tournaments = tournamentCount,
+                registrations = registrationCount,
+                isEmpty = playerCount == 0 && tournamentCount == 0 && registrationCount == 0
             };
         }
         catch (Exception ex)
