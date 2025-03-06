@@ -1,0 +1,74 @@
+/* Custom Font Declarations */
+
+/* 
+ * Example of how to use the custom font:
+ *
+ * 1. Place your .ttf font file in the /wwwroot/fonts/ directory
+ * 2. Uncomment and modify the @font-face declaration below
+ * 3. Use the font-family name in your CSS styles
+ */
+
+/*
+@font-face {
+    font-family: 'YourCustomFont';
+    src: url('../fonts/your-font-file.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+*/
+
+/* Example usage:
+.custom-font-element {
+    font-family: 'YourCustomFont', Helvetica, Arial, sans-serif;
+}
+*/
+
+/* Counter-Strike Font */
+@font-face {
+    font-family: 'CounterStrike';
+    src: url('../fonts/cs_regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Apply Counter-Strike font to specific UI elements */
+
+/* 1. Main menu items and header */
+.sidebar .navbar-brand,
+.sidebar .nav-item a {
+    font-family: 'CounterStrike', Helvetica, Arial, sans-serif !important;
+    letter-spacing: 1px;
+}
+
+/* 2. Homepage main title */
+.home-title {
+    font-family: 'CounterStrike', Helvetica, Arial, sans-serif !important;
+    letter-spacing: 1px;
+}
+
+/* 3. Page headers */
+h1, h3 {
+    font-family: 'CounterStrike', Helvetica, Arial, sans-serif !important;
+    letter-spacing: 1px;
+}
+
+/* 4. Pane headers (card headers) */
+.card-header h5 {
+    font-family: 'CounterStrike', Helvetica, Arial, sans-serif !important;
+    letter-spacing: 1px;
+}
+
+/* Adjust font size for better readability */
+.sidebar .navbar-brand {
+    font-size: 1.5rem;
+}
+
+.sidebar .nav-item a {
+    font-size: 1.2rem;
+}
+
+/* Note: The dash character '-' in this font renders as a Counter-Strike soldier.
+   When writing "Counter-Strike", use exactly that format with capital C and S
+   and a normal dash for the authentic Counter-Strike logo appearance. */ 
