@@ -110,10 +110,9 @@ public class TournamentsController : ControllerBase
 
         if (include == "sub-tournaments")
         {
-            // Load tournament with its sub-tournaments if requested
-            tournament = await _context.Tournament
-                                       .Include(t => t.SubTournaments)
-                                       .FirstOrDefaultAsync(t => t.Name == name);
+            // Load all tournaments and then build the hierarchy from the requested tournament
+            var allTournaments = await _context.Tournament.ToListAsync();
+            tournament = BuildTournamentHierarchy(name, allTournaments);
         }
         else
         {
@@ -124,10 +123,7 @@ public class TournamentsController : ControllerBase
         if (tournament == null)
             return NotFound();
 
-        // Build the resource with HATEOAS links
-        // The BuildResourceTournament method will recursively handle sub-tournaments if they're loaded
         var resource = BuildResourceTournament(tournament);
-
         return Ok(resource);
     }
 
@@ -366,5 +362,22 @@ public class TournamentsController : ControllerBase
         // The Tournament model already contains its SubTournaments property that will be serialized
 
         return resource;
+    }
+
+    private Tournament? BuildTournamentHierarchy(string name, List<Tournament> allTournaments)
+    {
+        // Find the tournament with the specified name
+        var tournament = allTournaments.FirstOrDefault(t => t.Name == name);
+        if (tournament == null)
+            return null;
+
+        // Recursively assign all subtournaments
+        tournament.SubTournaments = allTournaments.Where(t => t.ParentTournamentName == name).ToList();
+        foreach (var sub in tournament.SubTournaments)
+        {
+            // Build the subtree for each sub-tournament
+            BuildTournamentHierarchy(sub.Name, allTournaments);
+        }
+        return tournament;
     }
 }
