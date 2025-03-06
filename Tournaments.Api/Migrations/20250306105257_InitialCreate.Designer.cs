@@ -11,7 +11,7 @@ using Tournaments.Api.Data;
 namespace Tournaments.Api.Migrations
 {
     [DbContext(typeof(TournamentsApiContext))]
-    [Migration("20250303191841_InitialCreate")]
+    [Migration("20250306105257_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
