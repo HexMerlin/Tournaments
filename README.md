@@ -1,8 +1,11 @@
-﻿# Tournament Management Application
+﻿# <img src="docs/images/logo.svg" alt="" height="40"/>  Tournament Management Application
 
-## 1. Overview
+## 1. Summary 
 
 A RESTful web-application (client + server) for managing Counter-Strike tournaments. 
+
+[![Documentation](https://img.shields.io/badge/docs-latest-brightgreen.svg?style=flat)](https://hexmerlin.github.io/Tournaments/index.html) **API docs**
+
 
 ## 2. Technology Stack
 - **Backend:** ASP.NET Core Web API (with Azure hosting)
