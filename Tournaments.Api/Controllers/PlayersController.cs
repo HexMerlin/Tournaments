@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
 using Tournaments.Api.Data;
 using Tournaments.Shared.Hateoas;
 using Tournaments.Shared.Models;
@@ -14,12 +15,18 @@ namespace Tournaments.Api.Controllers;
 public class PlayersController : ControllerBase
 {
     private readonly TournamentsApiContext _context;
+    private readonly ILogger<PlayersController> _logger;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="PlayersController"/> class.
     /// </summary>
     /// <param name="context">The database context.</param>
-    public PlayersController(TournamentsApiContext context) => _context = context;
+    /// <param name="logger">The logger for this controller.</param>
+    public PlayersController(TournamentsApiContext context, ILogger<PlayersController> logger)
+    {
+        _context = context;
+        _logger = logger;
+    }
 
     /// <summary>
     /// Creates a new player.
@@ -68,6 +75,14 @@ public class PlayersController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<ResourcePlayer>>> GetPlayers()
     {
+        // Log database connection details
+        var connection = _context.Database.GetDbConnection();
+        _logger.LogInformation($"Database: {connection.Database} on {connection.DataSource}");
+        
+        // Log player count for diagnostics
+        var count = await _context.Player.CountAsync();
+        _logger.LogInformation($"Player count: {count}");
+        
         var players = await _context.Player.ToListAsync();
         var resources = players.Select(p => BuildResourcePlayer(p)).ToList();
         return Ok(resources);  // 200 OK with list of players (each with links)
