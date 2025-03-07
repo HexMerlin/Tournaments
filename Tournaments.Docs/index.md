@@ -17,5 +17,5 @@ Welcome to the documentation for **Tournaments**.
 - [Tournaments.Web](xref:Tournaments.Web)  
 
 ---
-[Automata source code repo at GitHub](https://github.com/HexMerlin/Tournaments)
+[Tournaments source code repo at GitHub](https://github.com/HexMerlin/Tournaments)
 
