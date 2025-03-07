@@ -1,5 +1,7 @@
 ﻿# <img src="docs/images/logo.svg" alt="" height="40"/>  Tournament Management Application
 
+![Tournaments Screenshot](Tournaments.Docs/images/tournaments-screen1.png)
+
 ## 1. Summary 
 
 A RESTful web-application (client + server) for managing Counter-Strike tournaments. 
