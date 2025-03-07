@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class TournamentsApiContext | Tournament Docs </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class TournamentsApiContext | Tournament Docs ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="images/favicon.png">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="styles/config.css">
+      <link rel="stylesheet" href="styles/singulink.css">
+      <link rel="stylesheet" href="styles/main.css">
+      <meta property="docfx:navrel" content="toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+  
+  <meta property="docfx:rel" content="">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="index.html">
+              <img src="images/logo.svg" alt="Tournament Docs" class="logomark">
+              <span class="brand-title">Tournament Docs</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="index.html">
+                          <img src="images/logo.svg" alt="Tournament Docs" class="logomark">
+                          <span class="brand-title">Tournament Docs</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+                </div>
+            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div id="contribution">
+                               <a href="https://github.com/HexMerlin/Tournaments/new/main/apiSpec/new?filename=Tournaments_Api_Data_TournamentsApiContext.md&amp;value=---%0Auid%3A%20Tournaments.Api.Data.TournamentsApiContext%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="Tournaments.Api.Data.TournamentsApiContext">
+
+
+
+  <h1 id="Tournaments_Api_Data_TournamentsApiContext" data-uid="Tournaments.Api.Data.TournamentsApiContext" class="text-break">Class TournamentsApiContext</h1>
+  <div class="markdown level0 summary"><p>Represents the database context for the Tournament Management Application.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext">DbContext</a></div>
+    <div class="level2"><span class="xref">TournamentsApiContext</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.infrastructure.iinfrastructure-1">IInfrastructure</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iserviceprovider">IServiceProvider</a>&gt;</div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.internal.idbcontextdependencies">IDbContextDependencies</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.internal.idbsetcache">IDbSetCache</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.internal.idbcontextpoolable">IDbContextPoolable</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.infrastructure.iresettableservice">IResettableService</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iasyncdisposable">IAsyncDisposable</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.set#microsoft-entityframeworkcore-dbcontext-set-1">DbContext.Set&lt;TEntity&gt;()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.set#microsoft-entityframeworkcore-dbcontext-set-1(system-string)">DbContext.Set&lt;TEntity&gt;(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.onconfiguring">DbContext.OnConfiguring(DbContextOptionsBuilder)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.configureconventions">DbContext.ConfigureConventions(ModelConfigurationBuilder)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.onmodelcreating">DbContext.OnModelCreating(ModelBuilder)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.savechanges#microsoft-entityframeworkcore-dbcontext-savechanges">DbContext.SaveChanges()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.savechanges#microsoft-entityframeworkcore-dbcontext-savechanges(system-boolean)">DbContext.SaveChanges(bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.savechangesasync#microsoft-entityframeworkcore-dbcontext-savechangesasync(system-threading-cancellationtoken)">DbContext.SaveChangesAsync(CancellationToken)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.savechangesasync#microsoft-entityframeworkcore-dbcontext-savechangesasync(system-boolean-system-threading-cancellationtoken)">DbContext.SaveChangesAsync(bool, CancellationToken)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.dispose">DbContext.Dispose()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.disposeasync">DbContext.DisposeAsync()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.entry#microsoft-entityframeworkcore-dbcontext-entry-1(-0)">DbContext.Entry&lt;TEntity&gt;(TEntity)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.entry#microsoft-entityframeworkcore-dbcontext-entry(system-object)">DbContext.Entry(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.add#microsoft-entityframeworkcore-dbcontext-add-1(-0)">DbContext.Add&lt;TEntity&gt;(TEntity)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.addasync#microsoft-entityframeworkcore-dbcontext-addasync-1(-0-system-threading-cancellationtoken)">DbContext.AddAsync&lt;TEntity&gt;(TEntity, CancellationToken)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.attach#microsoft-entityframeworkcore-dbcontext-attach-1(-0)">DbContext.Attach&lt;TEntity&gt;(TEntity)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.update#microsoft-entityframeworkcore-dbcontext-update-1(-0)">DbContext.Update&lt;TEntity&gt;(TEntity)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.remove#microsoft-entityframeworkcore-dbcontext-remove-1(-0)">DbContext.Remove&lt;TEntity&gt;(TEntity)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.add#microsoft-entityframeworkcore-dbcontext-add(system-object)">DbContext.Add(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.addasync#microsoft-entityframeworkcore-dbcontext-addasync(system-object-system-threading-cancellationtoken)">DbContext.AddAsync(object, CancellationToken)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.attach#microsoft-entityframeworkcore-dbcontext-attach(system-object)">DbContext.Attach(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.update#microsoft-entityframeworkcore-dbcontext-update(system-object)">DbContext.Update(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.remove#microsoft-entityframeworkcore-dbcontext-remove(system-object)">DbContext.Remove(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.addrange#microsoft-entityframeworkcore-dbcontext-addrange(system-object())">DbContext.AddRange(params object[])</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.addrangeasync#microsoft-entityframeworkcore-dbcontext-addrangeasync(system-object())">DbContext.AddRangeAsync(params object[])</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.attachrange#microsoft-entityframeworkcore-dbcontext-attachrange(system-object())">DbContext.AttachRange(params object[])</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.updaterange#microsoft-entityframeworkcore-dbcontext-updaterange(system-object())">DbContext.UpdateRange(params object[])</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.removerange#microsoft-entityframeworkcore-dbcontext-removerange(system-object())">DbContext.RemoveRange(params object[])</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.addrange#microsoft-entityframeworkcore-dbcontext-addrange(system-collections-generic-ienumerable((system-object)))">DbContext.AddRange(IEnumerable&lt;object&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.addrangeasync#microsoft-entityframeworkcore-dbcontext-addrangeasync(system-collections-generic-ienumerable((system-object))-system-threading-cancellationtoken)">DbContext.AddRangeAsync(IEnumerable&lt;object&gt;, CancellationToken)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.attachrange#microsoft-entityframeworkcore-dbcontext-attachrange(system-collections-generic-ienumerable((system-object)))">DbContext.AttachRange(IEnumerable&lt;object&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.updaterange#microsoft-entityframeworkcore-dbcontext-updaterange(system-collections-generic-ienumerable((system-object)))">DbContext.UpdateRange(IEnumerable&lt;object&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.removerange#microsoft-entityframeworkcore-dbcontext-removerange(system-collections-generic-ienumerable((system-object)))">DbContext.RemoveRange(IEnumerable&lt;object&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.find#microsoft-entityframeworkcore-dbcontext-find(system-type-system-object())">DbContext.Find(Type, params object[])</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.findasync#microsoft-entityframeworkcore-dbcontext-findasync(system-type-system-object())">DbContext.FindAsync(Type, params object[])</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.findasync#microsoft-entityframeworkcore-dbcontext-findasync(system-type-system-object()-system-threading-cancellationtoken)">DbContext.FindAsync(Type, object[], CancellationToken)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.find#microsoft-entityframeworkcore-dbcontext-find-1(system-object())">DbContext.Find&lt;TEntity&gt;(params object[])</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.findasync#microsoft-entityframeworkcore-dbcontext-findasync-1(system-object())">DbContext.FindAsync&lt;TEntity&gt;(params object[])</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.findasync#microsoft-entityframeworkcore-dbcontext-findasync-1(system-object()-system-threading-cancellationtoken)">DbContext.FindAsync&lt;TEntity&gt;(object[], CancellationToken)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.fromexpression">DbContext.FromExpression&lt;TResult&gt;(Expression&lt;Func&lt;IQueryable&lt;TResult&gt;&gt;&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.database">DbContext.Database</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.changetracker">DbContext.ChangeTracker</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.model">DbContext.Model</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.contextid">DbContext.ContextId</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.savingchanges">DbContext.SavingChanges</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.savedchanges">DbContext.SavedChanges</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.savechangesfailed">DbContext.SaveChangesFailed</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Tournaments.html">Tournaments</a>.<a class="xref" href="Tournaments.Api.html">Api</a>.<a class="xref" href="Tournaments.Api.Data.html">Data</a></h6>
+  <h6><strong>Assembly</strong>: Tournaments.Api.dll</h6>
+  <h5 id="Tournaments_Api_Data_TournamentsApiContext_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class TournamentsApiContext : DbContext, IInfrastructure&lt;IServiceProvider&gt;, IDbContextDependencies, IDbSetCache, IDbContextPoolable, IResettableService, IDisposable, IAsyncDisposable</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/HexMerlin/Tournaments/new/main/apiSpec/new?filename=Tournaments_Api_Data_TournamentsApiContext__ctor_Microsoft_EntityFrameworkCore_DbContextOptions_Tournaments_Api_Data_TournamentsApiContext__.md&amp;value=---%0Auid%3A%20Tournaments.Api.Data.TournamentsApiContext.%23ctor(Microsoft.EntityFrameworkCore.DbContextOptions%7BTournaments.Api.Data.TournamentsApiContext%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/HexMerlin/Tournaments/blob/main/Tournaments.Api/Data/TournamentsApiContext.cs/#L15">View Source</a>
+  </span>
+  <a id="Tournaments_Api_Data_TournamentsApiContext__ctor_" data-uid="Tournaments.Api.Data.TournamentsApiContext.#ctor*"></a>
+  <h4 id="Tournaments_Api_Data_TournamentsApiContext__ctor_Microsoft_EntityFrameworkCore_DbContextOptions_Tournaments_Api_Data_TournamentsApiContext__" data-uid="Tournaments.Api.Data.TournamentsApiContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Tournaments.Api.Data.TournamentsApiContext})">TournamentsApiContext(DbContextOptions&lt;TournamentsApiContext&gt;)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Tournaments.Api.Data.TournamentsApiContext.html">TournamentsApiContext</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TournamentsApiContext(DbContextOptions&lt;TournamentsApiContext&gt; options)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions-1">DbContextOptions</a>&lt;<a class="xref" href="Tournaments.Api.Data.TournamentsApiContext.html">TournamentsApiContext</a>&gt;</td>
+        <td><span class="parametername">options</span></td>
+        <td><p>The options to be used by the DbContext.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/HexMerlin/Tournaments/new/main/apiSpec/new?filename=Tournaments_Api_Data_TournamentsApiContext_Player.md&amp;value=---%0Auid%3A%20Tournaments.Api.Data.TournamentsApiContext.Player%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/HexMerlin/Tournaments/blob/main/Tournaments.Api/Data/TournamentsApiContext.cs/#L23">View Source</a>
+  </span>
+  <a id="Tournaments_Api_Data_TournamentsApiContext_Player_" data-uid="Tournaments.Api.Data.TournamentsApiContext.Player*"></a>
+  <h4 id="Tournaments_Api_Data_TournamentsApiContext_Player" data-uid="Tournaments.Api.Data.TournamentsApiContext.Player">Player</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the DbSet of players.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DbSet&lt;Player&gt; Player { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbset-1">DbSet</a>&lt;<a class="xref" href="Tournaments.Shared.Models.Player.html">Player</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/HexMerlin/Tournaments/new/main/apiSpec/new?filename=Tournaments_Api_Data_TournamentsApiContext_Registration.md&amp;value=---%0Auid%3A%20Tournaments.Api.Data.TournamentsApiContext.Registration%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/HexMerlin/Tournaments/blob/main/Tournaments.Api/Data/TournamentsApiContext.cs/#L33">View Source</a>
+  </span>
+  <a id="Tournaments_Api_Data_TournamentsApiContext_Registration_" data-uid="Tournaments.Api.Data.TournamentsApiContext.Registration*"></a>
+  <h4 id="Tournaments_Api_Data_TournamentsApiContext_Registration" data-uid="Tournaments.Api.Data.TournamentsApiContext.Registration">Registration</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the DbSet of registrations.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DbSet&lt;Registration&gt; Registration { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbset-1">DbSet</a>&lt;<a class="xref" href="Tournaments.Shared.Models.Registration.html">Registration</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/HexMerlin/Tournaments/new/main/apiSpec/new?filename=Tournaments_Api_Data_TournamentsApiContext_Tournament.md&amp;value=---%0Auid%3A%20Tournaments.Api.Data.TournamentsApiContext.Tournament%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/HexMerlin/Tournaments/blob/main/Tournaments.Api/Data/TournamentsApiContext.cs/#L28">View Source</a>
+  </span>
+  <a id="Tournaments_Api_Data_TournamentsApiContext_Tournament_" data-uid="Tournaments.Api.Data.TournamentsApiContext.Tournament*"></a>
+  <h4 id="Tournaments_Api_Data_TournamentsApiContext_Tournament" data-uid="Tournaments.Api.Data.TournamentsApiContext.Tournament">Tournament</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the DbSet of tournaments.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DbSet&lt;Tournament&gt; Tournament { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbset-1">DbSet</a>&lt;<a class="xref" href="Tournaments.Shared.Models.Tournament.html">Tournament</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.infrastructure.iinfrastructure-1">IInfrastructure&lt;T&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.internal.idbcontextdependencies">IDbContextDependencies</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.internal.idbsetcache">IDbSetCache</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.internal.idbcontextpoolable">IDbContextPoolable</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.infrastructure.iresettableservice">IResettableService</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iasyncdisposable">IAsyncDisposable</a>
+  </div>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="styles/docfx.js"></script>
+        <script type="text/javascript" src="styles/main.js"></script>
+        <script type="text/javascript" src="styles/singulink.js"></script>    </body>
+</html>

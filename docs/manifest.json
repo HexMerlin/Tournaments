@@ -1,0 +1,664 @@
+{
+  "source_base_path": "C:/Dev/HexMerlin/Tournaments/Tournaments.Docs",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      }
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/favicon.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/favicon.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/logo.svg",
+      "output": {
+        "resource": {
+          "relative_path": "images/logo.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Api.Controllers.HomeController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Api.Controllers.HomeController.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Api.Controllers.HomeController",
+      "Summary": "<p sourcefile=\"obj/api/Tournaments.Api.Controllers.HomeController.yml\" sourcestartlinenumber=\"1\">Provides API discovery endpoints for the Tournament Management Application.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Api.Controllers.PlayersController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Api.Controllers.PlayersController.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Api.Controllers.PlayersController",
+      "Summary": "<p sourcefile=\"obj/api/Tournaments.Api.Controllers.PlayersController.yml\" sourcestartlinenumber=\"1\">Provides API endpoints for managing players in the Tournament Management Application.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Api.Controllers.RegistrationsController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Api.Controllers.RegistrationsController.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Api.Controllers.RegistrationsController",
+      "Summary": "<p sourcefile=\"obj/api/Tournaments.Api.Controllers.RegistrationsController.yml\" sourcestartlinenumber=\"1\">Provides API endpoints for managing registrations in the Tournament Management Application.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Api.Controllers.TestUtilityController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Api.Controllers.TestUtilityController.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Api.Controllers.TestUtilityController",
+      "Summary": "<p sourcefile=\"obj/api/Tournaments.Api.Controllers.TestUtilityController.yml\" sourcestartlinenumber=\"1\">Provides utility endpoints for testing purposes in the Tournament Management Application.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Api.Controllers.TournamentsController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Api.Controllers.TournamentsController.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Api.Controllers.TournamentsController",
+      "Summary": "<p sourcefile=\"obj/api/Tournaments.Api.Controllers.TournamentsController.yml\" sourcestartlinenumber=\"1\">Provides API endpoints for managing tournaments in the Tournament Management Application.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Api.Controllers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Api.Controllers.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Api.Controllers",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Api.Data.DesignTimeDbContextFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Api.Data.DesignTimeDbContextFactory.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Api.Data.DesignTimeDbContextFactory",
+      "Summary": "<p sourcefile=\"obj/api/Tournaments.Api.Data.DesignTimeDbContextFactory.yml\" sourcestartlinenumber=\"1\">Factory for creating DbContext instances at design time (for migrations).</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Api.Data.TournamentsApiContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Api.Data.TournamentsApiContext.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Api.Data.TournamentsApiContext",
+      "Summary": "<p sourcefile=\"obj/api/Tournaments.Api.Data.TournamentsApiContext.yml\" sourcestartlinenumber=\"1\">Represents the database context for the Tournament Management Application.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Api.Data.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Api.Data.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Api.Data",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Api.Migrations.InitialCreate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Api.Migrations.InitialCreate.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Api.Migrations.InitialCreate",
+      "Summary": "<p sourcefile=\"obj/api/Tournaments.Api.Migrations.InitialCreate.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Api.Migrations.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Api.Migrations.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Api.Migrations",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Api.Program.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Api.Program.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Api.Program",
+      "Summary": "<p sourcefile=\"obj/api/Tournaments.Api.Program.yml\" sourcestartlinenumber=\"1\">Entry point for the Tournament Management Application.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Api.Tests.DatabaseTests.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Api.Tests.DatabaseTests.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Api.Tests.DatabaseTests",
+      "Summary": "<p sourcefile=\"obj/api/Tournaments.Api.Tests.DatabaseTests.yml\" sourcestartlinenumber=\"1\">Contains tests for verifying the database state and operations in the Tournament Management Application.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Api.Tests.HomeControllerTests.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Api.Tests.HomeControllerTests.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Api.Tests.HomeControllerTests",
+      "Summary": "<p sourcefile=\"obj/api/Tournaments.Api.Tests.HomeControllerTests.yml\" sourcestartlinenumber=\"1\">Contains tests for verifying the HomeController endpoints in the Tournament Management Application.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Api.Tests.PlayerTests.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Api.Tests.PlayerTests.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Api.Tests.PlayerTests",
+      "Summary": "<p sourcefile=\"obj/api/Tournaments.Api.Tests.PlayerTests.yml\" sourcestartlinenumber=\"1\">Contains tests for verifying the Player endpoints in the Tournament Management Application.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Api.Tests.RegistrationPlayersInTournamentTests.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Api.Tests.RegistrationPlayersInTournamentTests.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Api.Tests.RegistrationPlayersInTournamentTests",
+      "Summary": "<p sourcefile=\"obj/api/Tournaments.Api.Tests.RegistrationPlayersInTournamentTests.yml\" sourcestartlinenumber=\"1\">Contains tests for verifying the registration of players in tournaments in the Tournament Management Application.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Api.Tests.RegistrationTests.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Api.Tests.RegistrationTests.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Api.Tests.RegistrationTests",
+      "Summary": "<p sourcefile=\"obj/api/Tournaments.Api.Tests.RegistrationTests.yml\" sourcestartlinenumber=\"1\">Contains tests for verifying the registration endpoints in the Tournament Management Application.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Api.Tests.ResourceHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Api.Tests.ResourceHelper.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Api.Tests.ResourceHelper",
+      "Summary": "<p sourcefile=\"obj/api/Tournaments.Api.Tests.ResourceHelper.yml\" sourcestartlinenumber=\"1\">Provides helper methods for validating hypermedia links in resources.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Api.Tests.TournamentTests.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Api.Tests.TournamentTests.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Api.Tests.TournamentTests",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Api.Tests.TournamentsApiTestFixture.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Api.Tests.TournamentsApiTestFixture.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Api.Tests.TournamentsApiTestFixture",
+      "Summary": "<p sourcefile=\"obj/api/Tournaments.Api.Tests.TournamentsApiTestFixture.yml\" sourcestartlinenumber=\"1\">Provides a test fixture for the Tournament Management Application API, using an in-memory database.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Api.Tests.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Api.Tests.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Api.Tests",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Api.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Api.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Api",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Shared.Hateoas.Link.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Shared.Hateoas.Link.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Shared.Hateoas.Link",
+      "Summary": "<p sourcefile=\"obj/api/Tournaments.Shared.Hateoas.Link.yml\" sourcestartlinenumber=\"1\">Represents a hypermedia link used in HATEOAS.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Shared.Hateoas.Resource-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Shared.Hateoas.Resource-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Shared.Hateoas.Resource<T>",
+      "Summary": "<p sourcefile=\"obj/api/Tournaments.Shared.Hateoas.Resource-1.yml\" sourcestartlinenumber=\"1\">Represents a resource wrapper with hypermedia links for HATEOAS.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Shared.Hateoas.ResourcePlayer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Shared.Hateoas.ResourcePlayer.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Shared.Hateoas.ResourcePlayer",
+      "Summary": "<p sourcefile=\"obj/api/Tournaments.Shared.Hateoas.ResourcePlayer.yml\" sourcestartlinenumber=\"1\">Represents a player resource wrapper with hypermedia links for HATEOAS.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Shared.Hateoas.ResourceRegistration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Shared.Hateoas.ResourceRegistration.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Shared.Hateoas.ResourceRegistration",
+      "Summary": "<p sourcefile=\"obj/api/Tournaments.Shared.Hateoas.ResourceRegistration.yml\" sourcestartlinenumber=\"1\">Represents a registration resource wrapper with hypermedia links for HATEOAS.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Shared.Hateoas.ResourceTournament.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Shared.Hateoas.ResourceTournament.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Shared.Hateoas.ResourceTournament",
+      "Summary": "<p sourcefile=\"obj/api/Tournaments.Shared.Hateoas.ResourceTournament.yml\" sourcestartlinenumber=\"1\">Represents a tournament resource wrapper with hypermedia links for HATEOAS.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Shared.Hateoas.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Shared.Hateoas.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Shared.Hateoas",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Shared.Models.Player.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Shared.Models.Player.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Shared.Models.Player",
+      "Summary": "<p sourcefile=\"obj/api/Tournaments.Shared.Models.Player.yml\" sourcestartlinenumber=\"1\">Represents a player participating in tournaments.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Shared.Models.Registration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Shared.Models.Registration.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Shared.Models.Registration",
+      "Summary": "<p sourcefile=\"obj/api/Tournaments.Shared.Models.Registration.yml\" sourcestartlinenumber=\"1\">Represents the registration of a player in a tournament.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Shared.Models.Tournament.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Shared.Models.Tournament.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Shared.Models.Tournament",
+      "Summary": "<p sourcefile=\"obj/api/Tournaments.Shared.Models.Tournament.yml\" sourcestartlinenumber=\"1\">Represents a tournament in the Tournament Management Application.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Shared.Models.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Shared.Models.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Shared.Models",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Web.Program.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Web.Program.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Web.Program",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Web.Services.ApiStatusService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Web.Services.ApiStatusService.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Web.Services.ApiStatusService",
+      "Summary": "<p sourcefile=\"obj/api/Tournaments.Web.Services.ApiStatusService.yml\" sourcestartlinenumber=\"1\">Implementation of the IApiStatusService interface.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Web.Services.IApiStatusService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Web.Services.IApiStatusService.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Web.Services.IApiStatusService",
+      "Summary": "<p sourcefile=\"obj/api/Tournaments.Web.Services.IApiStatusService.yml\" sourcestartlinenumber=\"1\">Interface for API status-related operations.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Web.Services.IPlayerService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Web.Services.IPlayerService.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Web.Services.IPlayerService",
+      "Summary": "<p sourcefile=\"obj/api/Tournaments.Web.Services.IPlayerService.yml\" sourcestartlinenumber=\"1\">Interface for player-related operations.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Web.Services.IRegistrationService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Web.Services.IRegistrationService.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Web.Services.IRegistrationService",
+      "Summary": "<p sourcefile=\"obj/api/Tournaments.Web.Services.IRegistrationService.yml\" sourcestartlinenumber=\"1\">Interface for registration-related operations.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Web.Services.ITournamentService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Web.Services.ITournamentService.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Web.Services.ITournamentService",
+      "Summary": "<p sourcefile=\"obj/api/Tournaments.Web.Services.ITournamentService.yml\" sourcestartlinenumber=\"1\">Interface for tournament-related operations.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Web.Services.PlayerService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Web.Services.PlayerService.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Web.Services.PlayerService",
+      "Summary": "<p sourcefile=\"obj/api/Tournaments.Web.Services.PlayerService.yml\" sourcestartlinenumber=\"1\">Implementation of the IPlayerService interface.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Web.Services.RegistrationService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Web.Services.RegistrationService.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Web.Services.RegistrationService",
+      "Summary": "<p sourcefile=\"obj/api/Tournaments.Web.Services.RegistrationService.yml\" sourcestartlinenumber=\"1\">Implementation of the IRegistrationService interface.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Web.Services.TournamentService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Web.Services.TournamentService.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Web.Services.TournamentService",
+      "Summary": "<p sourcefile=\"obj/api/Tournaments.Web.Services.TournamentService.yml\" sourcestartlinenumber=\"1\">Implementation of the ITournamentService interface.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Web.Services.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Web.Services.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Web.Services",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Tournaments.Web.yml",
+      "output": {
+        ".html": {
+          "relative_path": "Tournaments.Web.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Tournaments.Web",
+      "Summary": null
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "obj/api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
