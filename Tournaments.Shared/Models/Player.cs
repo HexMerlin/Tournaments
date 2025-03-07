@@ -1,6 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
+/// <summary>
+/// Contains shared models and utilities used across the Tournaments application.
+/// </summary>
 namespace Tournaments.Shared.Models;
 
 /// <summary>
