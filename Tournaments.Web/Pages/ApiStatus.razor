@@ -6,6 +6,7 @@
 @using Microsoft.JSInterop
 @inject IApiStatusService ApiStatusService
 @inject IJSRuntime JSRuntime
+@inject IConfiguration Configuration
 
 <h3>API Status</h3>
 
@@ -484,54 +485,20 @@
 
     private void OpenSwaggerUI()
     {
-        // Determine the Swagger URL based on the API connection
-        string swaggerUrl;
-        
-        if (apiConnectionInfo != null)
+        // Get the API base URL from configuration
+        var baseUrl = Configuration["ApiBaseUrl"];
+
+        // Ensure we have a base URL
+        if (string.IsNullOrEmpty(baseUrl))
         {
-            // Extract the base URL from the API connection info
-            var apiUrl = apiConnectionErrorInfo?.ApiUrl ?? "";
-            
-            if (!string.IsNullOrEmpty(apiUrl))
-            {
-                try
-                {
-                    // Parse the API URL to extract the base URL
-                    var uri = new Uri(apiUrl);
-                    var baseUrl = $"{uri.Scheme}://{uri.Host}";
-                    
-                    // Add port if it's not the default port
-                    if (!uri.IsDefaultPort)
-                    {
-                        baseUrl += $":{uri.Port}";
-                    }
-                    
-                    swaggerUrl = $"{baseUrl}/swagger";
-                }
-                catch
-                {
-                    // Fallback based on environment
-                    swaggerUrl = apiConnectionInfo.Environment.Contains("Azure", StringComparison.OrdinalIgnoreCase)
-                        ? "https://tournaments-api.azurewebsites.net/swagger"
-                        : "https://localhost:7169/swagger";
-                }
-            }
-            else
-            {
-                // Fallback based on environment
-                swaggerUrl = apiConnectionInfo.Environment.Contains("Azure", StringComparison.OrdinalIgnoreCase)
-                    ? "https://tournaments-api.azurewebsites.net/swagger"
-                    : "https://localhost:7169/swagger";
-            }
+            Console.WriteLine("Error: Could not determine API base URL for Swagger UI");
+            return;
         }
-        else
-        {
-            // Fallback if we don't have API connection info
-            swaggerUrl = "https://localhost:7169/swagger";
-        }
-        
+
+        // Construct the Swagger URL
+        var swaggerUrl = $"{baseUrl}/swagger";
         Console.WriteLine($"Opening Swagger UI at: {swaggerUrl}");
-        
+
         // Open Swagger UI in a new tab
         JSRuntime.InvokeVoidAsync("open", swaggerUrl, "_blank");
     }
