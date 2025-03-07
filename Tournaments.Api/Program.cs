@@ -17,22 +17,39 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Load environment-specific configuration
-        var environment = builder.Environment.EnvironmentName;
-        Console.WriteLine($"Running in environment: {environment}");
-        
-        // Load specific configuration based on environment
-        if (environment == "Local")
+        var environmentName = builder.Environment.EnvironmentName;
+        Console.WriteLine($"Original environment: {environmentName}");
+
+        // We only want to use "Local" or "Azure" environments
+        // Map any other environment to one of these based on configuration
+        string effectiveEnvironment;
+
+        // Check if we're running in Azure (either through WEBSITE_SITE_NAME env var or explicit ASPNETCORE_ENVIRONMENT=Azure)
+        bool isRunningInAzure = !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("WEBSITE_SITE_NAME")) || 
+                                 environmentName.Equals("Azure", StringComparison.OrdinalIgnoreCase);
+
+        if (isRunningInAzure || environmentName.Equals("Production", StringComparison.OrdinalIgnoreCase))
         {
-            builder.Configuration.AddJsonFile("appsettings.Local.json", optional: true, reloadOnChange: true);
+            effectiveEnvironment = "Azure";
         }
-        else if (environment == "Azure")
+        else
         {
-            builder.Configuration.AddJsonFile("appsettings.Azure.json", optional: true, reloadOnChange: true);
+            // For all other environments (Development, Staging, etc.), use Local
+            effectiveEnvironment = "Local";
         }
 
+        Console.WriteLine($"Using effective environment: {effectiveEnvironment}");
+
+        // Load the appropriate configuration file
+        Console.WriteLine($"Loading {effectiveEnvironment} configuration");
+        builder.Configuration.AddJsonFile($"appsettings.{effectiveEnvironment}.json", optional: true, reloadOnChange: true);
+
         // Configure the database connection
+        var connectionString = builder.Configuration.GetConnectionString("TournamentsApiContext");
+        Console.WriteLine($"Using connection string: {connectionString}");
+
         builder.Services.AddDbContext<TournamentsApiContext>(options =>
-            options.UseSqlServer(builder.Configuration.GetConnectionString("TournamentsApiContext")
+            options.UseSqlServer(connectionString
                 ?? throw new InvalidOperationException("Connection string 'TournamentsApiContext' not found.")));
 
         // Add CORS support
