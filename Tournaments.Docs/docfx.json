@@ -1,0 +1,44 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dotnet/docfx/main/schemas/docfx.schema.json",
+  "metadata": [
+    {
+      "src": [
+        {
+          "src": "../",
+          "files": ["**/*.csproj"],
+          "exclude": [
+            "Tournaments.Docs/Tournaments.Docs.csproj",
+            "Tournaments.App/Tournaments.Api.Tests.csproj"
+          ]
+        }
+      ],
+      "dest": "obj/api",
+      "disableGitFeatures": false,
+    }
+  ],
+
+  "build": {
+    "content": [
+      { "files": ["*.md"] },
+      { "files": ["**/*.yml"], "src": "obj/api" },
+    ],
+    "xrefService": [
+      "https://xref.docs.microsoft.com/query?uid={uid}"
+    ],
+     "resource": [
+      { "files": ["images/**/*"] }
+    ],
+    "output": "../docs",
+    "template": [
+      "default",
+      "templates/singulinkfx"
+    ],
+    "globalMetadata": {
+      "_appName": "Tournament Docs",
+      "_appTitle": "Tournament Docs",
+      "_enableSearch": true,
+      "_appLogoPath": "images/logo.svg",
+      "_appFaviconPath": "images/favicon.png"
+    }
+  }
+}
