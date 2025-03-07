@@ -217,6 +217,6 @@
   "index.html": {
     "href": "index.html",
     "title": "Tournaments API Documentation | Tournament Docs",
-    "summary": "Tournaments documentation Welcome to the documentation for Tournaments. API Documentation Tournaments.Api Tournaments.Shared Tournaments.Web Automata source code repo at GitHub"
+    "summary": "Tournaments documentation Welcome to the documentation for Tournaments. API Documentation Tournaments.Api Tournaments.Web Tournaments.Shared.Models Tournaments.Shared.Hateoas Tournaments source code repo at GitHub"
   }
 }
