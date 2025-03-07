@@ -1,7 +1,0 @@
----
-description: C# coding and documentation standards
-globs: 
-alwaysApply: false
----
-[csharp-guidelines.md](mdc:csharp-guidelines.md)
-
