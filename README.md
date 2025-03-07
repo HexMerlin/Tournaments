@@ -6,8 +6,13 @@ A RESTful web-application (client + server) for managing Counter-Strike tourname
 
 [![Documentation](https://img.shields.io/badge/docs-latest-brightgreen.svg?style=flat)](https://hexmerlin.github.io/Tournaments/index.html) **API docs**
 
+## 2. Demo
 
-## 2. Technology Stack
+Test it here! (temporary hosted)
+
+[![DEMO](https://img.shields.io/badge/DEMO-orange?style=flat&labelColor=orange&color=orange&textColor=black)](https://tournaments-web-app.azurewebsites.net)
+
+## 3. Technology Stack
 - **Backend:** ASP.NET Core Web API (with Azure hosting)
 - **Entity Framework Core (EF Core)**
 - **SQL Server** (for persistence)
@@ -18,24 +23,6 @@ A RESTful web-application (client + server) for managing Counter-Strike tourname
   - **HttpClient** (for API communication)
   - **CSS for styling** 
   - **Swagger UI** (for API testing and documentation)
-
-## 3. Configuration Profiles
-
-The application uses two main configuration profiles:
-
-### 3.1 Local Profile
-- For local development and testing
-- Uses SQL LocalDb for the database
-- API runs on http://localhost:5241 and https://localhost:7168
-- Web app runs on http://localhost:5181 and https://localhost:7131
-- To run locally, select the "Local" profile in Visual Studio or use `dotnet run --environment Local`
-
-### 3.2 Azure Profile
-- For production deployment on Azure
-- Uses Azure SQL Database
-- API is hosted at https://tournaments-api.azurewebsites.net
-- Web app is hosted at https://tournaments-web-app.azurewebsites.net
-- To run in Azure mode, select the "Azure" profile in Visual Studio or use `dotnet run --environment Azure`
 
 ## 4. Data Models
 
