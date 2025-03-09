@@ -152,4 +152,41 @@ public class RegistrationService : IRegistrationService
             throw new InvalidOperationException($"Failed to remove player from tournament: {errorContent}");
         }
     }
+    
+    /// <inheritdoc/>
+    public async Task<Dictionary<string, IEnumerable<Player>>> GetPlayersForTournamentHierarchyAsync(IEnumerable<Tournament> tournaments)
+    {
+        var result = new Dictionary<string, IEnumerable<Player>>();
+        
+        // Process each tournament in the hierarchy
+        foreach (var tournament in tournaments)
+        {
+            try
+            {
+                // Get players directly registered in this tournament
+                var players = await GetPlayersInTournamentAsync(tournament.Name);
+                result[tournament.Name] = players;
+                
+                // Recursively process sub-tournaments
+                if (tournament.SubTournaments != null && tournament.SubTournaments.Any())
+                {
+                    // Get players for sub-tournaments
+                    var subTournamentPlayers = await GetPlayersForTournamentHierarchyAsync(tournament.SubTournaments);
+                    
+                    // Merge the results
+                    foreach (var kvp in subTournamentPlayers)
+                    {
+                        result[kvp.Key] = kvp.Value;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                // If we can't get players for a tournament, add an empty list
+                result[tournament.Name] = Array.Empty<Player>();
+            }
+        }
+        
+        return result;
+    }
 } 
