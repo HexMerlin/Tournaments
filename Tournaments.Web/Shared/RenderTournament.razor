@@ -1,0 +1,54 @@
+@using Tournaments.Shared.Models
+
+<div class="tournament-node level-@Level">
+    <div class="tournament-name">@Tournament.Name</div>
+    
+    @if (TournamentPlayers != null && TournamentPlayers.TryGetValue(Tournament.Name, out var players) && players.Any())
+    {
+        <div class="tournament-players">
+            <div class="players-header">Players (@players.Count()):</div>
+            <ul class="player-list">
+                @foreach (var player in players)
+                {
+                    <li class="player-item">@player.Gamertag</li>
+                }
+            </ul>
+        </div>
+    }
+    
+    @if (Tournament.SubTournaments != null && Tournament.SubTournaments.Any())
+    {
+        @foreach (var subTournament in Tournament.SubTournaments)
+        {
+            <RenderTournament Tournament="subTournament" TournamentPlayers="TournamentPlayers" Level="Level + 1" />
+        }
+    }
+</div>
+
+<style>
+    .players-header {
+        color: #17a2b8;
+        font-weight: 500;
+        margin-bottom: 5px;
+    }
+    
+    .player-item {
+        padding: 2px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .player-item:last-child {
+        border-bottom: none;
+    }
+</style>
+
+@code {
+    [Parameter]
+    public Tournament Tournament { get; set; } = null!;
+    
+    [Parameter]
+    public Dictionary<string, IEnumerable<Player>>? TournamentPlayers { get; set; }
+    
+    [Parameter]
+    public int Level { get; set; }
+} 

@@ -1,0 +1,97 @@
+@using Tournaments.Shared.Models
+
+<div class="tournament-hierarchy">
+    @if (Tournaments == null || !Tournaments.Any())
+    {
+        <p>No tournaments found.</p>
+    }
+    else
+    {
+        <div class="hierarchy-container">
+            @foreach (var tournament in Tournaments)
+            {
+                <div class="tournament-tree">
+                    <RenderTournament Tournament="tournament" TournamentPlayers="TournamentPlayers" Level="0" />
+                </div>
+            }
+        </div>
+    }
+</div>
+
+<style>
+    .tournament-hierarchy {
+        margin-top: 20px;
+    }
+    
+    .hierarchy-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .tournament-tree {
+        border: 1px solid rgba(52, 58, 64, 0.3);
+        border-radius: 4px;
+        padding: 10px;
+        background-color: rgba(33, 37, 41, 0.6);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .tournament-node {
+        margin-left: 20px;
+        padding: 10px;
+        border-left: 2px solid #007bff;
+    }
+    
+    .tournament-name {
+        font-weight: bold;
+        color: #17a2b8;
+    }
+    
+    .tournament-players {
+        margin-top: 5px;
+        padding: 5px;
+        background-color: rgba(33, 37, 41, 0.5);
+        border-radius: 4px;
+    }
+    
+    .player-list {
+        list-style-type: none;
+        padding-left: 10px;
+        margin-bottom: 0;
+        color: #f8f9fa;
+    }
+    
+    .level-0 {
+        margin-left: 0;
+        border-left: none;
+    }
+    
+    .level-1 {
+        border-left-color: #28a745;
+    }
+    
+    .level-2 {
+        border-left-color: #fd7e14;
+    }
+    
+    .level-3 {
+        border-left-color: #dc3545;
+    }
+    
+    .level-4 {
+        border-left-color: #6f42c1;
+    }
+    
+    .level-5 {
+        border-left-color: #20c997;
+    }
+</style>
+
+@code {
+    [Parameter]
+    public IEnumerable<Tournament>? Tournaments { get; set; }
+    
+    [Parameter]
+    public Dictionary<string, IEnumerable<Player>>? TournamentPlayers { get; set; }
+} 

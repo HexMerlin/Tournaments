@@ -205,6 +205,32 @@ else
             }
         </div>
     </div>
+
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card bg-dark text-light">
+                <div class="card-header bg-dark border-secondary">
+                    <h3>Tournament Hierarchy with Players</h3>
+                </div>
+                <div class="card-body">
+                    <button class="btn btn-info mb-3" @onclick="LoadTournamentHierarchy">
+                        @(isLoadingHierarchy ? "Loading..." : "Load Tournament Hierarchy")
+                    </button>
+                    
+                    @if (isLoadingHierarchy)
+                    {
+                        <div class="spinner-border text-info" role="status">
+                            <span class="visually-hidden">Loading hierarchy...</span>
+                        </div>
+                    }
+                    else if (tournamentHierarchy != null)
+                    {
+                        <TournamentHierarchyView Tournaments="tournamentHierarchy" TournamentPlayers="tournamentPlayers" />
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
 }
 
 @code {
@@ -220,6 +246,11 @@ else
     private bool showRegistrationForm;
     private string? registrationTournamentName;
     private string? registrationPlayerGamertag;
+    
+    // Tournament hierarchy related properties
+    private IEnumerable<Tournament>? tournamentHierarchy;
+    private Dictionary<string, IEnumerable<Player>>? tournamentPlayers;
+    private bool isLoadingHierarchy;
 
     protected override async Task OnInitializedAsync()
     {
@@ -355,6 +386,12 @@ else
             // Load the data for both views
             await LoadPlayersInTournament();
             await LoadTournamentsForPlayer();
+            
+            // Refresh tournament hierarchy if it's loaded
+            if (tournamentHierarchy != null)
+            {
+                await LoadTournamentHierarchy();
+            }
         }
         catch (Exception ex)
         {
@@ -389,6 +426,12 @@ else
             // Always refresh tournaments for player if the unregistered player is currently selected
             if (selectedPlayerGamertag == playerGamertag)
                 await LoadTournamentsForPlayer();
+            
+            // Refresh tournament hierarchy if it's loaded
+            if (tournamentHierarchy != null)
+            {
+                await LoadTournamentHierarchy();
+            }
         }
         catch (Exception ex)
         {
@@ -397,6 +440,61 @@ else
         finally
         {
             isLoading = false;
+        }
+    }
+    
+    private async Task LoadTournamentHierarchy()
+    {
+        isLoadingHierarchy = true;
+        errorMessage = null;
+        
+        try
+        {
+            // Get tournament hierarchy
+            tournamentHierarchy = await TournamentService.GetAllTournamentsWithHierarchyAsync();
+            
+            if (tournamentHierarchy != null && tournamentHierarchy.Any())
+            {
+                // Get players for each tournament in the hierarchy
+                tournamentPlayers = new Dictionary<string, IEnumerable<Player>>();
+                
+                foreach (var tournament in tournamentHierarchy)
+                {
+                    await LoadPlayersForTournament(tournament);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error loading tournament hierarchy: {ex.Message}";
+        }
+        finally
+        {
+            isLoadingHierarchy = false;
+        }
+    }
+    
+    private async Task LoadPlayersForTournament(Tournament tournament)
+    {
+        try
+        {
+            // Get players for this tournament
+            var players = await RegistrationService.GetPlayersInTournamentAsync(tournament.Name);
+            tournamentPlayers![tournament.Name] = players;
+            
+            // Recursively get players for sub-tournaments
+            if (tournament.SubTournaments != null)
+            {
+                foreach (var subTournament in tournament.SubTournaments)
+                {
+                    await LoadPlayersForTournament(subTournament);
+                }
+            }
+        }
+        catch
+        {
+            // If we can't get players for a tournament, add an empty list
+            tournamentPlayers![tournament.Name] = Array.Empty<Player>();
         }
     }
 
