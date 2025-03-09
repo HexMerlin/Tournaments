@@ -5,8 +5,15 @@ using Tournaments.Web.Services;
 
 namespace Tournaments.Web;
 
+/// <summary>
+/// The main entry point for the Tournaments Web application.
+/// </summary>
 public class Program
 {
+    /// <summary>
+    /// The main method which configures and runs the Blazor WebAssembly application.
+    /// </summary>
+    /// <param name="args">The command-line arguments.</param>
     public static async Task Main(string[] args)
     {
         var builder = WebAssemblyHostBuilder.CreateDefault(args);
@@ -15,29 +22,29 @@ public class Program
 
         var environment = builder.HostEnvironment.Environment;
         Console.WriteLine($"Running in environment: {environment}");
-        
+
         // In Blazor WebAssembly, configuration files are loaded from wwwroot by default
         // No need to explicitly load them, but we'll log what we're using
-        
+
         // Configure services with the loaded configuration
-        builder.Services.AddScoped(sp => 
+        builder.Services.AddScoped(sp =>
         {
             // Get configuration
             var configuration = builder.Configuration;
             var apiBaseUrl = configuration["ApiBaseUrl"];
-            
+
             // Fallback values based on environment
             if (string.IsNullOrEmpty(apiBaseUrl))
             {
-                apiBaseUrl = environment == "Azure" 
-                    ? "https://tournaments-api.azurewebsites.net" 
+                apiBaseUrl = environment == "Azure"
+                    ? "https://tournaments-api.azurewebsites.net"
                     : "https://localhost:7169";
-                
+
                 Console.WriteLine($"Warning: ApiBaseUrl not found in configuration, using fallback: {apiBaseUrl}");
             }
-            
+
             Console.WriteLine($"Using API base URL: {apiBaseUrl}");
-            
+
             return new HttpClient { BaseAddress = new Uri(apiBaseUrl) };
         });
 
