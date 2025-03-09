@@ -2106,6 +2106,22 @@ references:
   commentId: T:Tournaments.Web.Services.IRegistrationService
   fullName: Tournaments.Web.Services.IRegistrationService
   nameWithType: IRegistrationService
+- uid: Tournaments.Web.Services.IRegistrationService.GetPlayersForTournamentHierarchyAsync(System.Collections.Generic.IEnumerable{Tournaments.Shared.Models.Tournament})
+  name: GetPlayersForTournamentHierarchyAsync(IEnumerable<Tournament>)
+  href: Tournaments.Web.Services.IRegistrationService.html#Tournaments_Web_Services_IRegistrationService_GetPlayersForTournamentHierarchyAsync_System_Collections_Generic_IEnumerable_Tournaments_Shared_Models_Tournament__
+  commentId: M:Tournaments.Web.Services.IRegistrationService.GetPlayersForTournamentHierarchyAsync(System.Collections.Generic.IEnumerable{Tournaments.Shared.Models.Tournament})
+  name.vb: GetPlayersForTournamentHierarchyAsync(IEnumerable(Of Tournament))
+  fullName: Tournaments.Web.Services.IRegistrationService.GetPlayersForTournamentHierarchyAsync(System.Collections.Generic.IEnumerable<Tournaments.Shared.Models.Tournament>)
+  fullName.vb: Tournaments.Web.Services.IRegistrationService.GetPlayersForTournamentHierarchyAsync(System.Collections.Generic.IEnumerable(Of Tournaments.Shared.Models.Tournament))
+  nameWithType: IRegistrationService.GetPlayersForTournamentHierarchyAsync(IEnumerable<Tournament>)
+  nameWithType.vb: IRegistrationService.GetPlayersForTournamentHierarchyAsync(IEnumerable(Of Tournament))
+- uid: Tournaments.Web.Services.IRegistrationService.GetPlayersForTournamentHierarchyAsync*
+  name: GetPlayersForTournamentHierarchyAsync
+  href: Tournaments.Web.Services.IRegistrationService.html#Tournaments_Web_Services_IRegistrationService_GetPlayersForTournamentHierarchyAsync_
+  commentId: Overload:Tournaments.Web.Services.IRegistrationService.GetPlayersForTournamentHierarchyAsync
+  isSpec: "True"
+  fullName: Tournaments.Web.Services.IRegistrationService.GetPlayersForTournamentHierarchyAsync
+  nameWithType: IRegistrationService.GetPlayersForTournamentHierarchyAsync
 - uid: Tournaments.Web.Services.IRegistrationService.GetPlayersInTournamentAsync(System.String)
   name: GetPlayersInTournamentAsync(string)
   href: Tournaments.Web.Services.IRegistrationService.html#Tournaments_Web_Services_IRegistrationService_GetPlayersInTournamentAsync_System_String_
@@ -2221,6 +2237,19 @@ references:
   isSpec: "True"
   fullName: Tournaments.Web.Services.ITournamentService.DeleteTournamentAsync
   nameWithType: ITournamentService.DeleteTournamentAsync
+- uid: Tournaments.Web.Services.ITournamentService.GetAllTournamentsWithHierarchyAsync
+  name: GetAllTournamentsWithHierarchyAsync()
+  href: Tournaments.Web.Services.ITournamentService.html#Tournaments_Web_Services_ITournamentService_GetAllTournamentsWithHierarchyAsync
+  commentId: M:Tournaments.Web.Services.ITournamentService.GetAllTournamentsWithHierarchyAsync
+  fullName: Tournaments.Web.Services.ITournamentService.GetAllTournamentsWithHierarchyAsync()
+  nameWithType: ITournamentService.GetAllTournamentsWithHierarchyAsync()
+- uid: Tournaments.Web.Services.ITournamentService.GetAllTournamentsWithHierarchyAsync*
+  name: GetAllTournamentsWithHierarchyAsync
+  href: Tournaments.Web.Services.ITournamentService.html#Tournaments_Web_Services_ITournamentService_GetAllTournamentsWithHierarchyAsync_
+  commentId: Overload:Tournaments.Web.Services.ITournamentService.GetAllTournamentsWithHierarchyAsync
+  isSpec: "True"
+  fullName: Tournaments.Web.Services.ITournamentService.GetAllTournamentsWithHierarchyAsync
+  nameWithType: ITournamentService.GetAllTournamentsWithHierarchyAsync
 - uid: Tournaments.Web.Services.ITournamentService.GetTournamentAsync(System.String,System.Boolean)
   name: GetTournamentAsync(string, bool)
   href: Tournaments.Web.Services.ITournamentService.html#Tournaments_Web_Services_ITournamentService_GetTournamentAsync_System_String_System_Boolean_
@@ -2390,6 +2419,22 @@ references:
   fullName.vb: Tournaments.Web.Services.RegistrationService.New
   nameWithType: RegistrationService.RegistrationService
   nameWithType.vb: RegistrationService.New
+- uid: Tournaments.Web.Services.RegistrationService.GetPlayersForTournamentHierarchyAsync(System.Collections.Generic.IEnumerable{Tournaments.Shared.Models.Tournament})
+  name: GetPlayersForTournamentHierarchyAsync(IEnumerable<Tournament>)
+  href: Tournaments.Web.Services.RegistrationService.html#Tournaments_Web_Services_RegistrationService_GetPlayersForTournamentHierarchyAsync_System_Collections_Generic_IEnumerable_Tournaments_Shared_Models_Tournament__
+  commentId: M:Tournaments.Web.Services.RegistrationService.GetPlayersForTournamentHierarchyAsync(System.Collections.Generic.IEnumerable{Tournaments.Shared.Models.Tournament})
+  name.vb: GetPlayersForTournamentHierarchyAsync(IEnumerable(Of Tournament))
+  fullName: Tournaments.Web.Services.RegistrationService.GetPlayersForTournamentHierarchyAsync(System.Collections.Generic.IEnumerable<Tournaments.Shared.Models.Tournament>)
+  fullName.vb: Tournaments.Web.Services.RegistrationService.GetPlayersForTournamentHierarchyAsync(System.Collections.Generic.IEnumerable(Of Tournaments.Shared.Models.Tournament))
+  nameWithType: RegistrationService.GetPlayersForTournamentHierarchyAsync(IEnumerable<Tournament>)
+  nameWithType.vb: RegistrationService.GetPlayersForTournamentHierarchyAsync(IEnumerable(Of Tournament))
+- uid: Tournaments.Web.Services.RegistrationService.GetPlayersForTournamentHierarchyAsync*
+  name: GetPlayersForTournamentHierarchyAsync
+  href: Tournaments.Web.Services.RegistrationService.html#Tournaments_Web_Services_RegistrationService_GetPlayersForTournamentHierarchyAsync_
+  commentId: Overload:Tournaments.Web.Services.RegistrationService.GetPlayersForTournamentHierarchyAsync
+  isSpec: "True"
+  fullName: Tournaments.Web.Services.RegistrationService.GetPlayersForTournamentHierarchyAsync
+  nameWithType: RegistrationService.GetPlayersForTournamentHierarchyAsync
 - uid: Tournaments.Web.Services.RegistrationService.GetPlayersInTournamentAsync(System.String)
   name: GetPlayersInTournamentAsync(string)
   href: Tournaments.Web.Services.RegistrationService.html#Tournaments_Web_Services_RegistrationService_GetPlayersInTournamentAsync_System_String_
@@ -2524,6 +2569,19 @@ references:
   isSpec: "True"
   fullName: Tournaments.Web.Services.TournamentService.DeleteTournamentAsync
   nameWithType: TournamentService.DeleteTournamentAsync
+- uid: Tournaments.Web.Services.TournamentService.GetAllTournamentsWithHierarchyAsync
+  name: GetAllTournamentsWithHierarchyAsync()
+  href: Tournaments.Web.Services.TournamentService.html#Tournaments_Web_Services_TournamentService_GetAllTournamentsWithHierarchyAsync
+  commentId: M:Tournaments.Web.Services.TournamentService.GetAllTournamentsWithHierarchyAsync
+  fullName: Tournaments.Web.Services.TournamentService.GetAllTournamentsWithHierarchyAsync()
+  nameWithType: TournamentService.GetAllTournamentsWithHierarchyAsync()
+- uid: Tournaments.Web.Services.TournamentService.GetAllTournamentsWithHierarchyAsync*
+  name: GetAllTournamentsWithHierarchyAsync
+  href: Tournaments.Web.Services.TournamentService.html#Tournaments_Web_Services_TournamentService_GetAllTournamentsWithHierarchyAsync_
+  commentId: Overload:Tournaments.Web.Services.TournamentService.GetAllTournamentsWithHierarchyAsync
+  isSpec: "True"
+  fullName: Tournaments.Web.Services.TournamentService.GetAllTournamentsWithHierarchyAsync
+  nameWithType: TournamentService.GetAllTournamentsWithHierarchyAsync
 - uid: Tournaments.Web.Services.TournamentService.GetTournamentAsync(System.String,System.Boolean)
   name: GetTournamentAsync(string, bool)
   href: Tournaments.Web.Services.TournamentService.html#Tournaments_Web_Services_TournamentService_GetTournamentAsync_System_String_System_Boolean_

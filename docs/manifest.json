@@ -31,6 +31,16 @@
       "version": ""
     },
     {
+      "type": "Resource",
+      "source_relative_path": "images/tournaments-screen1.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/tournaments-screen1.png"
+        }
+      },
+      "version": ""
+    },
+    {
       "type": "Conceptual",
       "source_relative_path": "index.md",
       "output": {
@@ -500,7 +510,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "Tournaments.Web.Program",
-      "Summary": null
+      "Summary": "<p sourcefile=\"obj/api/Tournaments.Web.Program.yml\" sourcestartlinenumber=\"1\">The main entry point for the Tournaments Web application.</p>\n"
     },
     {
       "type": "ManagedReference",

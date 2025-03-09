@@ -86,7 +86,7 @@
                         </div>
 
                          <div id="contribution">
-                               <a href="https://github.com/HexMerlin/Tournaments/new/main/apiSpec/new?filename=Tournaments_Web_Services_RegistrationService.md&amp;value=---%0Auid%3A%20Tournaments.Web.Services.RegistrationService%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                               <a href="https://github.com/HexMerlin/Tournaments/new/dev/apiSpec/new?filename=Tournaments_Web_Services_RegistrationService.md&amp;value=---%0Auid%3A%20Tournaments.Web.Services.RegistrationService%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
                          </div>
 
                     <article class="content wrap" id="_content" data-uid="Tournaments.Web.Services.RegistrationService">
@@ -140,10 +140,10 @@
 </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/HexMerlin/Tournaments/new/main/apiSpec/new?filename=Tournaments_Web_Services_RegistrationService__ctor_System_Net_Http_HttpClient_.md&amp;value=---%0Auid%3A%20Tournaments.Web.Services.RegistrationService.%23ctor(System.Net.Http.HttpClient)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+    <a href="https://github.com/HexMerlin/Tournaments/new/dev/apiSpec/new?filename=Tournaments_Web_Services_RegistrationService__ctor_System_Net_Http_HttpClient_.md&amp;value=---%0Auid%3A%20Tournaments.Web.Services.RegistrationService.%23ctor(System.Net.Http.HttpClient)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/HexMerlin/Tournaments/blob/main/Tournaments.Web/Services/RegistrationService.cs/#L27">View Source</a>
+    <a href="https://github.com/HexMerlin/Tournaments/blob/dev/Tournaments.Web/Services/RegistrationService.cs/#L27">View Source</a>
   </span>
   <a id="Tournaments_Web_Services_RegistrationService__ctor_" data-uid="Tournaments.Web.Services.RegistrationService.#ctor*"></a>
   <h4 id="Tournaments_Web_Services_RegistrationService__ctor_System_Net_Http_HttpClient_" data-uid="Tournaments.Web.Services.RegistrationService.#ctor(System.Net.Http.HttpClient)">RegistrationService(HttpClient)</h4>
@@ -176,10 +176,60 @@
 </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/HexMerlin/Tournaments/new/main/apiSpec/new?filename=Tournaments_Web_Services_RegistrationService_GetPlayersInTournamentAsync_System_String_.md&amp;value=---%0Auid%3A%20Tournaments.Web.Services.RegistrationService.GetPlayersInTournamentAsync(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+    <a href="https://github.com/HexMerlin/Tournaments/new/dev/apiSpec/new?filename=Tournaments_Web_Services_RegistrationService_GetPlayersForTournamentHierarchyAsync_System_Collections_Generic_IEnumerable_Tournaments_Shared_Models_Tournament__.md&amp;value=---%0Auid%3A%20Tournaments.Web.Services.RegistrationService.GetPlayersForTournamentHierarchyAsync(System.Collections.Generic.IEnumerable%7BTournaments.Shared.Models.Tournament%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/HexMerlin/Tournaments/blob/main/Tournaments.Web/Services/RegistrationService.cs/#L55">View Source</a>
+    <a href="https://github.com/HexMerlin/Tournaments/blob/dev/Tournaments.Web/Services/RegistrationService.cs/#L157">View Source</a>
+  </span>
+  <a id="Tournaments_Web_Services_RegistrationService_GetPlayersForTournamentHierarchyAsync_" data-uid="Tournaments.Web.Services.RegistrationService.GetPlayersForTournamentHierarchyAsync*"></a>
+  <h4 id="Tournaments_Web_Services_RegistrationService_GetPlayersForTournamentHierarchyAsync_System_Collections_Generic_IEnumerable_Tournaments_Shared_Models_Tournament__" data-uid="Tournaments.Web.Services.RegistrationService.GetPlayersForTournamentHierarchyAsync(System.Collections.Generic.IEnumerable{Tournaments.Shared.Models.Tournament})">GetPlayersForTournamentHierarchyAsync(IEnumerable&lt;Tournament&gt;)</h4>
+  <div class="markdown level1 summary"><p>Gets players for each tournament in a hierarchy.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;Dictionary&lt;string, IEnumerable&lt;Player&gt;&gt;&gt; GetPlayersForTournamentHierarchyAsync(IEnumerable&lt;Tournament&gt; tournaments)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Tournaments.Shared.Models.Tournament.html">Tournament</a>&gt;</td>
+        <td><span class="parametername">tournaments</span></td>
+        <td><p>The collection of tournaments.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Tournaments.Shared.Models.Player.html">Player</a>&gt;&gt;&gt;</td>
+        <td><p>A dictionary mapping tournament names to their registered players.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/HexMerlin/Tournaments/new/dev/apiSpec/new?filename=Tournaments_Web_Services_RegistrationService_GetPlayersInTournamentAsync_System_String_.md&amp;value=---%0Auid%3A%20Tournaments.Web.Services.RegistrationService.GetPlayersInTournamentAsync(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/HexMerlin/Tournaments/blob/dev/Tournaments.Web/Services/RegistrationService.cs/#L55">View Source</a>
   </span>
   <a id="Tournaments_Web_Services_RegistrationService_GetPlayersInTournamentAsync_" data-uid="Tournaments.Web.Services.RegistrationService.GetPlayersInTournamentAsync*"></a>
   <h4 id="Tournaments_Web_Services_RegistrationService_GetPlayersInTournamentAsync_System_String_" data-uid="Tournaments.Web.Services.RegistrationService.GetPlayersInTournamentAsync(System.String)">GetPlayersInTournamentAsync(string)</h4>
@@ -226,10 +276,10 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/HexMerlin/Tournaments/new/main/apiSpec/new?filename=Tournaments_Web_Services_RegistrationService_GetRegistrationAsync_System_String_System_String_.md&amp;value=---%0Auid%3A%20Tournaments.Web.Services.RegistrationService.GetRegistrationAsync(System.String%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+    <a href="https://github.com/HexMerlin/Tournaments/new/dev/apiSpec/new?filename=Tournaments_Web_Services_RegistrationService_GetRegistrationAsync_System_String_System_String_.md&amp;value=---%0Auid%3A%20Tournaments.Web.Services.RegistrationService.GetRegistrationAsync(System.String%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/HexMerlin/Tournaments/blob/main/Tournaments.Web/Services/RegistrationService.cs/#L48">View Source</a>
+    <a href="https://github.com/HexMerlin/Tournaments/blob/dev/Tournaments.Web/Services/RegistrationService.cs/#L48">View Source</a>
   </span>
   <a id="Tournaments_Web_Services_RegistrationService_GetRegistrationAsync_" data-uid="Tournaments.Web.Services.RegistrationService.GetRegistrationAsync*"></a>
   <h4 id="Tournaments_Web_Services_RegistrationService_GetRegistrationAsync_System_String_System_String_" data-uid="Tournaments.Web.Services.RegistrationService.GetRegistrationAsync(System.String,System.String)">GetRegistrationAsync(string, string)</h4>
@@ -282,10 +332,10 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/HexMerlin/Tournaments/new/main/apiSpec/new?filename=Tournaments_Web_Services_RegistrationService_GetTournamentsForPlayerAsync_System_String_.md&amp;value=---%0Auid%3A%20Tournaments.Web.Services.RegistrationService.GetTournamentsForPlayerAsync(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+    <a href="https://github.com/HexMerlin/Tournaments/new/dev/apiSpec/new?filename=Tournaments_Web_Services_RegistrationService_GetTournamentsForPlayerAsync_System_String_.md&amp;value=---%0Auid%3A%20Tournaments.Web.Services.RegistrationService.GetTournamentsForPlayerAsync(System.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/HexMerlin/Tournaments/blob/main/Tournaments.Web/Services/RegistrationService.cs/#L111">View Source</a>
+    <a href="https://github.com/HexMerlin/Tournaments/blob/dev/Tournaments.Web/Services/RegistrationService.cs/#L111">View Source</a>
   </span>
   <a id="Tournaments_Web_Services_RegistrationService_GetTournamentsForPlayerAsync_" data-uid="Tournaments.Web.Services.RegistrationService.GetTournamentsForPlayerAsync*"></a>
   <h4 id="Tournaments_Web_Services_RegistrationService_GetTournamentsForPlayerAsync_System_String_" data-uid="Tournaments.Web.Services.RegistrationService.GetTournamentsForPlayerAsync(System.String)">GetTournamentsForPlayerAsync(string)</h4>
@@ -332,10 +382,10 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/HexMerlin/Tournaments/new/main/apiSpec/new?filename=Tournaments_Web_Services_RegistrationService_RegisterPlayerAsync_System_String_System_String_.md&amp;value=---%0Auid%3A%20Tournaments.Web.Services.RegistrationService.RegisterPlayerAsync(System.String%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+    <a href="https://github.com/HexMerlin/Tournaments/new/dev/apiSpec/new?filename=Tournaments_Web_Services_RegistrationService_RegisterPlayerAsync_System_String_System_String_.md&amp;value=---%0Auid%3A%20Tournaments.Web.Services.RegistrationService.RegisterPlayerAsync(System.String%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/HexMerlin/Tournaments/blob/main/Tournaments.Web/Services/RegistrationService.cs/#L33">View Source</a>
+    <a href="https://github.com/HexMerlin/Tournaments/blob/dev/Tournaments.Web/Services/RegistrationService.cs/#L33">View Source</a>
   </span>
   <a id="Tournaments_Web_Services_RegistrationService_RegisterPlayerAsync_" data-uid="Tournaments.Web.Services.RegistrationService.RegisterPlayerAsync*"></a>
   <h4 id="Tournaments_Web_Services_RegistrationService_RegisterPlayerAsync_System_String_System_String_" data-uid="Tournaments.Web.Services.RegistrationService.RegisterPlayerAsync(System.String,System.String)">RegisterPlayerAsync(string, string)</h4>
@@ -388,10 +438,10 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/HexMerlin/Tournaments/new/main/apiSpec/new?filename=Tournaments_Web_Services_RegistrationService_RemovePlayerFromTournamentAsync_System_String_System_String_.md&amp;value=---%0Auid%3A%20Tournaments.Web.Services.RegistrationService.RemovePlayerFromTournamentAsync(System.String%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+    <a href="https://github.com/HexMerlin/Tournaments/new/dev/apiSpec/new?filename=Tournaments_Web_Services_RegistrationService_RemovePlayerFromTournamentAsync_System_String_System_String_.md&amp;value=---%0Auid%3A%20Tournaments.Web.Services.RegistrationService.RemovePlayerFromTournamentAsync(System.String%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/HexMerlin/Tournaments/blob/main/Tournaments.Web/Services/RegistrationService.cs/#L145">View Source</a>
+    <a href="https://github.com/HexMerlin/Tournaments/blob/dev/Tournaments.Web/Services/RegistrationService.cs/#L145">View Source</a>
   </span>
   <a id="Tournaments_Web_Services_RegistrationService_RemovePlayerFromTournamentAsync_" data-uid="Tournaments.Web.Services.RegistrationService.RemovePlayerFromTournamentAsync*"></a>
   <h4 id="Tournaments_Web_Services_RegistrationService_RemovePlayerFromTournamentAsync_System_String_System_String_" data-uid="Tournaments.Web.Services.RegistrationService.RemovePlayerFromTournamentAsync(System.String,System.String)">RemovePlayerFromTournamentAsync(string, string)</h4>
