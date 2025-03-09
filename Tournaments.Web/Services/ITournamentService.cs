@@ -42,4 +42,10 @@ public interface ITournamentService
     /// <param name="name">The name of the tournament to delete.</param>
     /// <returns>A task representing the asynchronous operation.</returns>
     Task DeleteTournamentAsync(string name);
+
+    /// <summary>
+    /// Gets all root tournaments with their complete hierarchy of sub-tournaments.
+    /// </summary>
+    /// <returns>A collection of root tournaments with their sub-tournament hierarchies.</returns>
+    Task<IEnumerable<Tournament>> GetAllTournamentsWithHierarchyAsync();
 } 
