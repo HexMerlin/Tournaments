@@ -89,4 +89,29 @@ public class TournamentService : ITournamentService
             throw new InvalidOperationException($"Failed to delete tournament: {errorContent}");
         }
     }
+    
+    /// <inheritdoc/>
+    public async Task<IEnumerable<Tournament>> GetAllTournamentsWithHierarchyAsync()
+    {
+        // Get all tournaments
+        var allTournaments = await GetTournamentsAsync();
+        
+        if (allTournaments == null || !allTournaments.Any())
+        {
+            return Array.Empty<Tournament>();
+        }
+        
+        // Identify root tournaments (those without a parent)
+        var rootTournaments = allTournaments.Where(t => string.IsNullOrEmpty(t.ParentTournamentName)).ToList();
+        
+        // For each root tournament, get its complete hierarchy
+        var result = new List<Tournament>();
+        foreach (var rootTournament in rootTournaments)
+        {
+            var tournamentWithHierarchy = await GetTournamentAsync(rootTournament.Name, true);
+            result.Add(tournamentWithHierarchy);
+        }
+        
+        return result;
+    }
 } 
