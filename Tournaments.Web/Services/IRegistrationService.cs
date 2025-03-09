@@ -44,4 +44,11 @@ public interface IRegistrationService
     /// <param name="playerGamertag">The gamertag of the player.</param>
     /// <returns>A task representing the asynchronous operation.</returns>
     Task RemovePlayerFromTournamentAsync(string tournamentName, string playerGamertag);
+
+    /// <summary>
+    /// Gets players for each tournament in a hierarchy.
+    /// </summary>
+    /// <param name="tournaments">The collection of tournaments.</param>
+    /// <returns>A dictionary mapping tournament names to their registered players.</returns>
+    Task<Dictionary<string, IEnumerable<Player>>> GetPlayersForTournamentHierarchyAsync(IEnumerable<Tournament> tournaments);
 } 
