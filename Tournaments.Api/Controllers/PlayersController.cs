@@ -75,17 +75,32 @@ public class PlayersController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<ResourcePlayer>>> GetPlayers()
     {
-        // Log database connection details
-        var connection = _context.Database.GetDbConnection();
-        _logger.LogInformation($"Database: {connection.Database} on {connection.DataSource}");
-        
-        // Log player count for diagnostics
-        var count = await _context.Player.CountAsync();
-        _logger.LogInformation($"Player count: {count}");
-        
-        var players = await _context.Player.ToListAsync();
-        var resources = players.Select(p => BuildResourcePlayer(p)).ToList();
-        return Ok(resources);  // 200 OK with list of players (each with links)
+        try
+        {
+            // Only log connection details if using a relational database
+            if (_context.Database.IsRelational())
+            {
+                var connection = _context.Database.GetDbConnection();
+                _logger.LogInformation($"Database: {connection.Database} on {connection.DataSource}");
+            }
+            else
+            {
+                _logger.LogInformation("Using non-relational database provider");
+            }
+            
+            // Log player count for diagnostics
+            var count = await _context.Player.CountAsync();
+            _logger.LogInformation($"Player count: {count}");
+            
+            var players = await _context.Player.ToListAsync();
+            var resources = players.Select(p => BuildResourcePlayer(p)).ToList();
+            return Ok(resources);  // 200 OK with list of players (each with links)
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error retrieving players");
+            throw;
+        }
     }
 
     /// <summary>

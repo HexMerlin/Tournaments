@@ -47,14 +47,21 @@ public class TestUtilityController : ControllerBase
 
         try
         {
-            // Remove all registrations
-            await _context.Registration.ExecuteDeleteAsync();
-
-            // Remove all tournaments
-            await _context.Tournament.ExecuteDeleteAsync();
-
-            // Remove all players
-            await _context.Player.ExecuteDeleteAsync();
+            if (_context.Database.IsRelational())
+            {
+                // For relational databases, use ExecuteDeleteAsync
+                await _context.Registration.ExecuteDeleteAsync();
+                await _context.Tournament.ExecuteDeleteAsync();
+                await _context.Player.ExecuteDeleteAsync();
+            }
+            else
+            {
+                // For in-memory database, use RemoveRange
+                _context.Registration.RemoveRange(_context.Registration);
+                _context.Tournament.RemoveRange(_context.Tournament);
+                _context.Player.RemoveRange(_context.Player);
+                await _context.SaveChangesAsync();
+            }
 
             return Ok(new { message = "Database reset successful" });
         }
