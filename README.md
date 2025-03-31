@@ -8,13 +8,8 @@ A RESTful web-application (client + server) for managing Counter-Strike tourname
 
 [![Documentation](https://img.shields.io/badge/docs-latest-brightgreen.svg?style=flat)](https://hexmerlin.github.io/Tournaments/index.html) **API docs**
 
-## 2. Demo
 
-Test it here! (temporary hosted)
-
-[![DEMO](https://img.shields.io/badge/DEMO-orange?style=flat&labelColor=orange&color=orange&textColor=black)](https://tournaments-web-app.azurewebsites.net)
-
-## 3. Technology Stack
+## 2. Technology Stack
 - **Backend:** ASP.NET Core Web API (with Azure hosting)
 - **Entity Framework Core (EF Core)**
 - **SQL Server** (for persistence)
@@ -26,11 +21,11 @@ Test it here! (temporary hosted)
   - **CSS for styling** 
   - **Swagger UI** (for API testing and documentation)
 
-## 4. Data Models
+## 3. Data Models
 
 The core models of this application are as follows:
 
-### 4.1 Player
+### 3.1 Player
 - Represents an individual participating in tournaments.
 - **Properties:**
   - **Gamertag** (globally unique, case-sensitive, primary key)
@@ -38,7 +33,7 @@ The core models of this application are as follows:
   - **Age** (integer, between 1 and 200, modifiable)
 - Players can exist independently of tournament registrations.
 
-### 4.2 Tournament
+### 3.2 Tournament
 - Represents a competitive event where players participate.
 - **Properties:**
   - **Name** (unique identifier of the tournament, primary key)
@@ -46,39 +41,39 @@ The core models of this application are as follows:
 - Tournaments can have sub-tournaments.
 - Tournament nesting can be up to 5 levels deep (parent-child-child-child-child).
 
-### 4.3 Registration
+### 3.3 Registration
 - Represents the relationship between a player and a tournament.
 - **Properties:**
   - **Tournament** (reference to the tournament)
   - **Player** (reference to the player)
 - Players can only register in a sub-tournament if they are already in the parent tournament.
 
-## 5. Endpoints
+## 4. Endpoints
 
-### 5.1 API Discovery Endpoint
+### 4.1 API Discovery Endpoint
 - GET /api → Entry point providing links to all available resources and operations, enabling clients to discover the complete API without prior knowledge of endpoints.
 - GET / → Returns a JSON response with links to the API discovery endpoint and other relevant resources.
 
-### 5.2 Player Endpoints
+### 4.2 Player Endpoints
 - `GET /api/players/{gamertag}` → Get player details.
 - `POST /api/players` → Create a player. The player data, including the key gamertag, must be provided in the request body.
 - `PUT /api/players/{gamertag}` → Update player details (except Gamertag). The updated player data must be provided in the request body.
 - `DELETE /api/players/{gamertag}` → Delete a player.
 
-### 5.3 Tournament Endpoints
+### 4.3 Tournament Endpoints
 - `GET /api/tournaments/{name}` → Retrieve tournament details.
 - `GET /api/tournaments/{name}?include=sub-tournaments` → Retrieve tournament with sub-tournaments.
 - `POST /api/tournaments` → Create a new tournament. The tournament data, including the key name, must be provided in the request body.
 - `PUT /api/tournaments/{name}` → Update tournament details (except Name). The updated tournament data must be provided in the request body.
 - `DELETE /api/tournaments/{name}` → Delete a tournament (and its sub-tournaments).
 
-### 5.4 Registration Endpoints
+### 4.4 Registration Endpoints
 - `POST /api/tournaments/{tournamentName}/players/{gamertag}` → Register a player in a tournament.
 - `DELETE /api/registrations/{tournamentName}/{gamertag}` → Remove a player from a tournament.
 - `GET /api/tournaments/{tournamentName}/players/{gamertag}` → Retrieve a specific registration.
 - `GET /api/tournaments/{tournamentName}/players` → Retrieve all players registered in a tournament.
 
-## 6. Data Constraints & Deletion Rules
+## 5. Data Constraints & Deletion Rules
 
 - **Tournament Deletion:**
   - If a tournament is deleted, all its sub-tournaments are deleted.
@@ -94,7 +89,7 @@ The core models of this application are as follows:
 
 - All constraints are enforced at the API level, not in the database.
 
-## 7. API Behavior & Error Handling
+## 6. API Behavior & Error Handling
 
 - Standard RESTful HTTP methods and status codes include:
   - `400` → Validation error (e.g., duplicate gamertag, invalid player registration). Responses are in JSON format following the ProblemDetails specification.
@@ -103,11 +98,11 @@ The core models of this application are as follows:
 
 - **Use ProblemDetails format for error responses.****Use ProblemDetails format for error responses.**
 
-## 8. Misc Info
+## 7. Misc Info
 - Tournament retrieval allows optional embedding of sub-tournaments via `GET api/tournaments/{name}?include=sub-tournaments`.
 - Since this is a demo project, we prioritize ease of use - no user logins or passwords are required.
 
-## 9. Appendix. HATEOAS API Responses
+## 8. Appendix. HATEOAS API Responses
 
 The API adheres to to strict REST architectural constraints which implies HATEOAS (Hypermedia As The Engine Of Application State). 
 Clients can discover available actions dynamically through hypermedia links embedded in responses, without relying on predefined knowledge of endpoint structures beyond the entry point. 
